@@ -8,6 +8,7 @@ export default {
     extend: {
       colors: {
         'grayish': "#EAF1F1",
+        'light': '#E3E8E7',
         'nephritis': '#329993'
       },
       backgroundImage: {

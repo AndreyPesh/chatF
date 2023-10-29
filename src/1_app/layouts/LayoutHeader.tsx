@@ -3,7 +3,7 @@ import Header from '../../3_widgets/header/Header';
 
 const LayoutHeader = () => {
   return (
-    <div className='flex'>
+    <div className='m-auto flex max-w-[1260px]'>
       <Header />
       <Outlet />
     </div>
