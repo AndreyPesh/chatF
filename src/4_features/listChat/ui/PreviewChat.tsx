@@ -1,6 +1,12 @@
-const PreviewChat = () => {
+import classNames from 'classnames';
+
+const PreviewChat = ({ isActive }: { isActive: boolean }) => {
   return (
-    <div className="pl-6 pt-6 pr-6 cursor-pointer">
+    <div
+      className={classNames('pl-6 pt-6 pr-6 cursor-pointer', {
+        'border-l-[6px] border-l-nephritis bg-light-nephritis': isActive,
+      })}
+    >
       <div className="pb-6 flex border-b border-b-light">
         <div className="w-[58px] h-[58px] rounded-full overflow-hidden">
           <img src="/public/avatars/Avatar1.png" alt="user" />

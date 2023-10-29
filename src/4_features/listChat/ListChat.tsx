@@ -4,9 +4,9 @@ const fakeArrayChat = Array(5).fill('');
 
 const ListChat = () => {
   return (
-    <div className='max-w-[370px]'>
+    <div className="max-w-[370px]">
       {fakeArrayChat.map((_, index) => (
-        <PreviewChat key={index} />
+        <PreviewChat key={index} isActive={Math.random() > 0.5} />
       ))}
     </div>
   );
