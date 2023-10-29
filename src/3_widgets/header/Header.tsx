@@ -1,53 +1,36 @@
-import { NavLink } from 'react-router-dom';
+import IconLink from './link/IconLink';
+import { ROUTES } from '../../6_shared/enums/routes';
+
+const listLink = [
+  {
+    route: ROUTES.MAIN,
+    imageBg: 'bg-profile',
+    activeImageBg: 'bg-profile_active',
+  },
+  {
+    route: ROUTES.MESSAGES,
+    imageBg: 'bg-messages',
+    activeImageBg: 'bg-messages_active',
+  },
+  {
+    route: ROUTES.CONTACTS,
+    imageBg: 'bg-contacts',
+    activeImageBg: 'bg-contacts_active',
+  },
+];
 
 const Header = () => {
   return (
     <header className="p-2">
-      <NavLink
-        to="/"
-        className={({ isActive }) =>
-          stylesIcon({
-            isActive,
-            imageBg: 'bg-profile',
-            activeImageBg: 'bg-profile_active',
-          })
-        }
-      ></NavLink>
-      <NavLink
-        to="/messages"
-        className={({ isActive }) =>
-          stylesIcon({
-            isActive,
-            imageBg: 'bg-messages',
-            activeImageBg: 'bg-messages_active',
-          })
-        }
-      ></NavLink>
-      <NavLink
-        to="/contacts"
-        className={({ isActive }) =>
-          stylesIcon({
-            isActive,
-            imageBg: 'bg-contacts',
-            activeImageBg: 'bg-contacts_active',
-          })
-        }
-      ></NavLink>
+      {listLink.map(({ route, imageBg, activeImageBg }) => (
+        <IconLink
+          route={route}
+          imageBg={imageBg}
+          activeImageBg={activeImageBg}
+        />
+      ))}
     </header>
   );
 };
 
 export default Header;
-
-const stylesIcon = ({
-  isActive,
-  imageBg,
-  activeImageBg,
-}: {
-  isActive: boolean;
-  imageBg: string;
-  activeImageBg: string;
-}) => {
-  const base_styles = `inline-flex w-[52px] h-[52px] rounded-full ${imageBg} bg-no-repeat bg-center hover:bg-grayish`;
-  return isActive ? base_styles + ` ${activeImageBg} bg-grayish` : base_styles;
-};

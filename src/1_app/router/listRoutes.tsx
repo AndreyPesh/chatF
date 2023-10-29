@@ -4,21 +4,22 @@ import MainPage from '../../2_pages/MainPage';
 import ContactsPage from '../../2_pages/ContactsPage';
 import MessagePage from '../../2_pages/MessagePage';
 import NotFoundPage from '../../2_pages/NotFoundPage';
+import { ROUTES } from '../../6_shared/enums/routes';
 
 const listRoutes = [
   {
     element: <LayoutHeader />,
     children: [
       {
-        path: '/',
+        path: ROUTES.MAIN,
         element: <MainPage />,
       },
       {
-        path: '/messages',
+        path: ROUTES.MESSAGES,
         element: <MessagePage />,
       },
       {
-        path: '/contacts',
+        path: ROUTES.CONTACTS,
         element: <ContactsPage />,
       },
       {
