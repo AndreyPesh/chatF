@@ -7,6 +7,8 @@ export default {
   theme: {
     extend: {
       colors: {
+        'dark': '#465352',
+        'concrete': '#758A89',
         'grayish': "#EAF1F1",
         'light': '#E3E8E7',
         'nephritis': '#329993',

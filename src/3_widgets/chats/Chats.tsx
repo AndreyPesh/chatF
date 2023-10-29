@@ -1,3 +1,4 @@
+import ListChat from '../../4_features/listChat/ListChat';
 import SearchField from '../../4_features/searchField/SearchField';
 import Button from '../../6_shared/buttons/Button';
 import { TYPE_BUTTON } from '../../6_shared/enums/buttons';
@@ -11,6 +12,7 @@ const Chats = () => {
         <SearchField />
         <Button sign="Start New Chat" type={TYPE_BUTTON.NEPHRITE} />
       </div>
+      <ListChat />
     </div>
   );
 };
