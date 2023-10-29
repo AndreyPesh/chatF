@@ -1,9 +1,9 @@
-import Title from '../6_shared/titles/Title';
+import Chats from '../3_widgets/chats/Chats';
 
 const MessagePage = () => {
   return (
     <div className="py-[20px] px-[24px]">
-      <Title>Messages</Title>
+      <Chats />
     </div>
   );
 };
