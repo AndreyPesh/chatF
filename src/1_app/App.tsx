@@ -1,7 +1,13 @@
+import { RouterProvider } from 'react-router-dom';
 import './styles/index.css';
+import { router } from './router/listRoutes';
 
 const App = () => {
-  return <div className='text-lg text-red-600'>App</div>;
-};
+  return (
+    <>
+      <RouterProvider router={router} />
+    </>
+  )
+}
 
 export default App;
