@@ -1,6 +1,7 @@
-import IconLink from '../../4_features/IconLink/IconLink';
+import IconLink from '../../4_features/iconLink/IconLink';
 import Avatar from '../../4_features/avatar/Avatar';
 import { ROUTES } from '../../6_shared/enums/routes';
+import Logout from '../../4_features/iconButtons/Logout';
 
 const listLink = [
   {
@@ -32,6 +33,7 @@ const Header = () => {
           activeImageBg={activeImageBg}
         />
       ))}
+      <Logout />
     </header>
   );
 };
