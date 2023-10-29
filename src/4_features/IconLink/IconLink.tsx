@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { NavLink } from 'react-router-dom';
-import { ROUTES } from '../../../6_shared/enums/routes';
+import { ROUTES } from '../../6_shared/enums/routes';
 import { getIconStyles } from './helpers/iconStyle';
 
 interface IconLinkProps {

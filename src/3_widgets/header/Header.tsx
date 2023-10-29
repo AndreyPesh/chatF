@@ -23,16 +23,18 @@ const listLink = [
 
 const Header = () => {
   return (
-    <header className="p-2">
+    <header className="px-[22px] py-[32px] flex flex-col justify-between min-h-[100vh]">
       <Avatar />
-      {listLink.map(({ route, imageBg, activeImageBg }) => (
-        <IconLink
-          key={route}
-          route={route}
-          imageBg={imageBg}
-          activeImageBg={activeImageBg}
-        />
-      ))}
+      <div className='flex flex-col pt-[48px] grow'>
+        {listLink.map(({ route, imageBg, activeImageBg }) => (
+          <IconLink
+            key={route}
+            route={route}
+            imageBg={imageBg}
+            activeImageBg={activeImageBg}
+          />
+        ))}
+      </div>
       <Logout />
     </header>
   );
