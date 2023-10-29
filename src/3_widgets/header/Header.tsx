@@ -24,6 +24,7 @@ const Header = () => {
     <header className="p-2">
       {listLink.map(({ route, imageBg, activeImageBg }) => (
         <IconLink
+          key={route}
           route={route}
           imageBg={imageBg}
           activeImageBg={activeImageBg}

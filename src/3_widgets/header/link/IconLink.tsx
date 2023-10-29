@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 import { ROUTES } from '../../../6_shared/enums/routes';
-import { IconStyles } from './helpers/iconStyle';
+import { getIconStyles } from './helpers/iconStyle';
 
 interface IconLinkProps {
   route: ROUTES;
@@ -14,7 +14,7 @@ const IconLink: FC<IconLinkProps> = ({ route, imageBg, activeImageBg }) => {
     <NavLink
       to={route}
       className={({ isActive }) =>
-        IconStyles({
+        getIconStyles({
           isActive,
           imageBg,
           activeImageBg,

@@ -1,4 +1,4 @@
-export const IconStyles = ({
+export const getIconStyles = ({
   isActive,
   imageBg,
   activeImageBg,
