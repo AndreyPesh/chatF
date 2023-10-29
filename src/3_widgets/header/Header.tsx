@@ -1,4 +1,5 @@
-import IconLink from './link/IconLink';
+import IconLink from '../../4_features/IconLink/IconLink';
+import Avatar from '../../4_features/avatar/Avatar';
 import { ROUTES } from '../../6_shared/enums/routes';
 
 const listLink = [
@@ -22,6 +23,7 @@ const listLink = [
 const Header = () => {
   return (
     <header className="p-2">
+      <Avatar />
       {listLink.map(({ route, imageBg, activeImageBg }) => (
         <IconLink
           key={route}

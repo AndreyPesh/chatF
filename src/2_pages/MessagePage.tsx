@@ -2,7 +2,7 @@
 const MessagePage = () => {
   return (
     <>
-      <div>messages</div>
+      <div>Messages</div>
     </>
   );
 };

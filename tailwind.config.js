@@ -7,7 +7,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        'grayish': "#EAF1F1"
+        'grayish': "#EAF1F1",
+        'nephritis': '#329993'
       },
       backgroundImage: {
         'messages': "url('/icons/letter.svg')",
