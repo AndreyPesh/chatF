@@ -9,7 +9,8 @@ export default {
       colors: {
         'grayish': "#EAF1F1",
         'light': '#E3E8E7',
-        'nephritis': '#329993'
+        'nephritis': '#329993',
+        'red': '#DD0000'
       },
       backgroundImage: {
         'messages': "url('/icons/letter.svg')",
@@ -19,7 +20,8 @@ export default {
         'profile': "url('/icons/profile.svg')",
         'profile_active': "url('/icons/profile_active.svg')",
         'logout': "url('/icons/logout.svg')",
-        'search': "url('/icons/search.svg')"
+        'search': "url('/icons/search.svg')",
+        'plus': "url('/icons/plus.svg')"
       }
     },
   },
