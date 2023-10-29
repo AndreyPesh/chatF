@@ -18,7 +18,8 @@ export default {
         'contacts_active': "url('/icons/contacts_active.svg')",
         'profile': "url('/icons/profile.svg')",
         'profile_active': "url('/icons/profile_active.svg')",
-        'logout': "url('/icons/logout.svg')"
+        'logout': "url('/icons/logout.svg')",
+        'search': "url('/icons/search.svg')"
       }
     },
   },
