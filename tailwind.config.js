@@ -33,6 +33,12 @@ export default {
         'read': "url('/icons/read_status.svg')",
         'unread': "url('/icons/unread_status.svg')",
         'send': "url('/icons/send.svg')",
+        'video': "url('/actions/video.svg')",
+        'microphone': "url('/actions/microphone.svg')",
+        'smile': "url('/actions/smile.svg')",
+        'attach': "url('/actions/attach.svg')",
+        'note': "url('/actions/note.svg')",
+        'points': "url('/actions/points.svg')",
       }
     },
   },
