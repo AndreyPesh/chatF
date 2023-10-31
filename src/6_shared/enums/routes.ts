@@ -1,5 +1,5 @@
 export const enum ROUTES {
-  MAIN = 'main',
+  MAIN = '/',
   MESSAGES = 'messages',
   CONTACTS = 'contacts',
 }

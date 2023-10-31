@@ -13,6 +13,7 @@ export default {
         'light': '#E3E8E7',
         'nephritis': '#329993',
         'light-nephritis': '#E8F7F7',
+        'light-green': '#00B207',
         'red': '#DD0000'
       },
       backgroundImage: {
