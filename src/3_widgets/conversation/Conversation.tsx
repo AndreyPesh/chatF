@@ -2,7 +2,7 @@ import ClientCaption from "../../4_features/client/ClientCaption";
 
 const Conversation = () => {
   return (
-    <div>
+    <div className="w-full">
       <ClientCaption />
     </div>
   );

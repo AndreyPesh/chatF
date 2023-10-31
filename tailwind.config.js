@@ -25,7 +25,10 @@ export default {
         'profile_active': "url('/icons/profile_active.svg')",
         'logout': "url('/icons/logout.svg')",
         'search': "url('/icons/search.svg')",
-        'plus': "url('/icons/plus.svg')"
+        'plus': "url('/icons/plus.svg')",
+        'call': "url('/icons/call.svg')",
+        'video': "url('/icons/video.svg')",
+        'option': "url('/icons/points.svg')"
       }
     },
   },
