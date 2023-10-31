@@ -1,6 +1,7 @@
 import { ROLE_DIALOGUE_PARTICIPANTS } from '../../6_shared/enums/roles';
 import { MessageData } from '../../6_shared/interfaces/message';
 import InterlocutorMessage from '../messages/InterlocutorMessage';
+import UserMessage from '../messages/UserMessage';
 
 const fakeDiscussion: Array<MessageData> = [
   {
@@ -37,14 +38,22 @@ const fakeDiscussion: Array<MessageData> = [
 
 const Discussion = () => {
   return (
-    <div className='bg-light-gray'>
-      {fakeDiscussion.map(({ userPhotoUrl, message, time }) => (
-        <InterlocutorMessage
-          userPhotoUrl={userPhotoUrl}
-          message={message}
-          time={time}
-        />
-      ))}
+    <div className="bg-light-gray p-5">
+      {fakeDiscussion.map(({ userPhotoUrl, message, time, role }) => {
+        return role === ROLE_DIALOGUE_PARTICIPANTS.INTERLOCUTOR ? (
+          <InterlocutorMessage
+            userPhotoUrl={userPhotoUrl}
+            message={message}
+            time={time}
+          />
+        ) : (
+          <UserMessage
+            userPhotoUrl={userPhotoUrl}
+            message={message}
+            time={time}
+          />
+        );
+      })}
     </div>
   );
 };
