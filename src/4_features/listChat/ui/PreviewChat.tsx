@@ -1,5 +1,6 @@
 import { Dispatch, FC, SetStateAction } from 'react';
 import classNames from 'classnames';
+import StatusMessage from '../../statusMessage/StatusMessage';
 
 interface PreviewChatProps {
   id: number;
@@ -32,7 +33,7 @@ const PreviewChat: FC<PreviewChatProps> = ({
         </div>
         <div className="pl-[28px] flex flex-col justify-between">
           <span className="font-medium text-concrete">2h</span>
-          <span className="inline-flex w-6 h-6">xx</span>
+          <StatusMessage />
         </div>
       </div>
     </div>

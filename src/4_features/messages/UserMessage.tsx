@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import StatusMessage from '../statusMessage/StatusMessage';
 
 interface UserMessageProps {
   userPhotoUrl: string;
@@ -13,7 +14,12 @@ const UserMessage: FC<UserMessageProps> = ({ userPhotoUrl, message, time }) => {
         <p className="p-5 bg-nephritis text-white leading-[18px] rounded-tl-[20px] rounded-tr-[20px] rounded-bl-[20px]">
           {message}
         </p>
-        <span className="pt-2 inline-flex justify-end w-full text-concrete">{time} AM</span>
+        <div className="pt-2 w-full inline-flex justify-end items-center">
+          <StatusMessage />
+          <span className="ml-2 inline-flex text-concrete">
+            {time} AM
+          </span>
+        </div>
       </div>
       <span className="mb-[29px] inline-flex w-12 h-12 self-end rounded-full overflow-hidden">
         <img src={userPhotoUrl} alt={`user`} />

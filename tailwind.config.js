@@ -29,7 +29,9 @@ export default {
         'plus': "url('/icons/plus.svg')",
         'call': "url('/icons/call.svg')",
         'video': "url('/icons/video.svg')",
-        'option': "url('/icons/points.svg')"
+        'option': "url('/icons/points.svg')",
+        'read': "url('/icons/read_status.svg')",
+        'unread': "url('/icons/unread_status.svg')",
       }
     },
   },
