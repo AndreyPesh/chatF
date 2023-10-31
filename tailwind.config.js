@@ -32,6 +32,7 @@ export default {
         'option': "url('/icons/points.svg')",
         'read': "url('/icons/read_status.svg')",
         'unread': "url('/icons/unread_status.svg')",
+        'send': "url('/icons/send.svg')",
       }
     },
   },

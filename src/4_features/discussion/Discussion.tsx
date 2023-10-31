@@ -1,6 +1,7 @@
 import { ROLE_DIALOGUE_PARTICIPANTS } from '../../6_shared/enums/roles';
 import { MessageData } from '../../6_shared/interfaces/message';
 import InterlocutorMessage from '../messages/InterlocutorMessage';
+import SendMessageField from '../messages/SendMessageField';
 import UserMessage from '../messages/UserMessage';
 
 const fakeDiscussion: Array<MessageData> = [
@@ -61,6 +62,7 @@ const Discussion = () => {
           />
         );
       })}
+      <SendMessageField />
     </div>
   );
 };
