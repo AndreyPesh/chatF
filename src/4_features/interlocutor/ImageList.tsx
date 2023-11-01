@@ -17,7 +17,7 @@ const ImageList = () => {
         <p className="grow text-4 text-concrete">(12 Files)</p>
         <span className="w-5 h-5 inline-flex bg-arrow bg-center bg-no-repeat cursor-pointer"></span>
       </div>
-      <div>
+      <div className='py-4 flex flex-wrap gap-1'>
         {imageUrlList.map((imageUrl, index) => (
           <Image key={index} imageUrl={imageUrl} />
         ))}

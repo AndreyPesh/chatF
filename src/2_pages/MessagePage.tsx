@@ -4,7 +4,7 @@ import InterlocutorDescription from '../3_widgets/interlocutor/InterlocutorDescr
 
 const MessagePage = () => {
   return (
-    <div className="relative py-[20px] px-[24px] flex w-full overflow-hidden">
+    <div className="relative py-[20px] px-[24px] flex w-full border-r border-light overflow-hidden">
       <Chats />
       <Conversation />
       <InterlocutorDescription />
