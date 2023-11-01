@@ -9,7 +9,7 @@ const File: FC<FileProps> = ({ filename }) => {
     <div className="flex items-center">
       <span className="w-8 h-8 inline-flex bg-file bg-center bg-no-repeat"></span>
       <a href={`#${filename}`} className='grow'>{filename}</a>
-      <span className='w-8 h-8 inline-flex bg-option bg-center bg-no-repeat cursor-pointer'></span>
+      <span className='w-8 h-8 inline-flex bg-option bg-right bg-no-repeat cursor-pointer'></span>
     </div>
   );
 };

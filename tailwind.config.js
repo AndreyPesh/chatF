@@ -34,6 +34,7 @@ export default {
         'unread': "url('/icons/unread_status.svg')",
         'send': "url('/icons/send.svg')",
         'file': "url('/icons/file.svg')",
+        'block': "url('/icons/block.svg')",
         'arrow': "url('/icons/arrow.svg')",
         'cross': "url('/icons/cross.svg')",
         'video': "url('/actions/video.svg')",
