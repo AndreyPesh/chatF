@@ -7,7 +7,7 @@ const SearchField = () => {
   };
 
   return (
-    <div className="pt-[24px] w-full">
+    <div className="w-full">
       <form onSubmit={searchHandler}>
         <div className="relative w-full">
           <input
