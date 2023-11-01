@@ -12,7 +12,7 @@ const ListRecentFiles = () => {
       </div>
       <div>
         {fakeListFiles.map((file) => (
-          <File filename={file} />
+          <File key={file} filename={file} />
         ))}
       </div>
       <span className='font-medium text-nephritis cursor-pointer select-none'>Show more</span>

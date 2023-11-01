@@ -18,8 +18,8 @@ const ImageList = () => {
         <span className="w-5 h-5 inline-flex bg-arrow bg-center bg-no-repeat cursor-pointer"></span>
       </div>
       <div>
-        {imageUrlList.map((imageUrl) => (
-          <Image imageUrl={imageUrl} />
+        {imageUrlList.map((imageUrl, index) => (
+          <Image key={index} imageUrl={imageUrl} />
         ))}
       </div>
     </div>
