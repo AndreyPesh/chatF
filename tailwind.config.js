@@ -35,6 +35,7 @@ export default {
         'send': "url('/icons/send.svg')",
         'file': "url('/icons/file.svg')",
         'arrow': "url('/icons/arrow.svg')",
+        'cross': "url('/icons/cross.svg')",
         'video': "url('/actions/video.svg')",
         'microphone': "url('/actions/microphone.svg')",
         'smile': "url('/actions/smile.svg')",
