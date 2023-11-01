@@ -1,4 +1,5 @@
 import InterlocutorInfo from '../../4_features/interlocutor/InterlocutorInfo';
+import ImageList from './ImageList';
 import ListRecentFiles from './ListRecentFiles';
 import Notifications from './Notifications';
 
@@ -8,6 +9,7 @@ const InterlocutorDescription = () => {
       <InterlocutorInfo />
       <Notifications />
       <ListRecentFiles />
+      <ImageList />
     </div>
   );
 };
