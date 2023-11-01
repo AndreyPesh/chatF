@@ -1,9 +1,11 @@
+import useInterlocutorDescriptionState from "../../6_shared/hooks/useInterlocutorDescriptionState";
 import StatusClient from "../statusClient/StatusClient";
 import ActionClient from "./ui/ActionClient";
 
 const ClientCaption = () => {
+  const { showInterlocutorDescription } = useInterlocutorDescriptionState();
   return (
-    <div className="py-6 px-8 flex w-full">
+    <div onClick={showInterlocutorDescription} className="py-6 px-8 flex w-full">
       <div className="w-[52px] h-[52px] rounded-full overflow-hidden">
         <img src="/avatars/Robert.png" alt="Client photo" />
       </div>
