@@ -11,7 +11,7 @@ const InterlocutorDescription = () => {
   return (
     <div
       className={classNames(
-        'absolute top-[-20px] p-8 pt-10 w-[382px] bg-white border-l-2 border-l-light transition-all',
+        'absolute top-[-20px] p-8 pt-10 w-[382px] bg-white border-l-2 border-l-light transition-all z-20',
         {'right-0': isShow},
         {'right-[-200%]': !isShow},
       )}

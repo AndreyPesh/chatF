@@ -5,7 +5,7 @@ import ActionClient from './ui/ActionClient';
 const ClientCaption = () => {
   const { showInterlocutorDescription } = useInterlocutorDescriptionState();
   return (
-    <div className="py-6 px-8 flex w-full">
+    <div className="sticky top-0 py-6 px-8 flex w-full bg-white z-10">
       <div
         onClick={showInterlocutorDescription}
         className="w-[52px] h-[52px] rounded-full overflow-hidden cursor-pointer"

@@ -44,7 +44,7 @@ const fakeDiscussion: Array<MessageData> = [
 
 const Discussion = () => {
   return (
-    <div className="bg-light-gray p-5">
+    <div className="w-full p-5 pb-0 bg-light-gray">
       {fakeDiscussion.map(({ id, userPhotoUrl, message, time, role }) => {
         return role === ROLE_DIALOGUE_PARTICIPANTS.INTERLOCUTOR ? (
           <InterlocutorMessage

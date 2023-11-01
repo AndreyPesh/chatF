@@ -9,7 +9,7 @@ interface UserMessageProps {
 
 const UserMessage: FC<UserMessageProps> = ({ userPhotoUrl, message, time }) => {
   return (
-    <div className="mt-5 flex justify-end">
+    <div className="my-3 flex justify-end">
       <div className="max-w-[340px] mr-4">
         <p className="p-5 bg-nephritis text-white leading-[18px] rounded-tl-[20px] rounded-tr-[20px] rounded-bl-[20px]">
           {message}

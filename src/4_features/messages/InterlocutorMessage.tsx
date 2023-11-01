@@ -12,7 +12,7 @@ const InterlocutorMessage: FC<InterlocutorProps> = ({
   time,
 }) => {
   return (
-    <div className='mt-5 flex'>
+    <div className='my-3 flex'>
       <span className='mb-[29px] inline-flex w-12 h-12 self-end rounded-full overflow-hidden'>
         <img src={userPhotoUrl} alt={`user`} />
       </span>

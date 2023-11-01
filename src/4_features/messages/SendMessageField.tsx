@@ -34,7 +34,7 @@ const SendMessageField = () => {
   };
 
   return (
-    <div className="bg-white border border-light rounded-[20px] overflow-hidden">
+    <div className="sticky bottom-2 w-full bg-white border border-light rounded-[20px] overflow-hidden">
       <form onSubmit={onSendMessageHandler}>
         <div className="max-h-[96px]">
           <textarea

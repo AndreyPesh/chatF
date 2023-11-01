@@ -3,7 +3,7 @@ import Discussion from '../../4_features/discussion/Discussion';
 
 const Conversation = () => {
   return (
-    <div className="w-full">
+    <div className="relative w-full max-h-[100vh] overflow-y-auto">
       <ClientCaption />
       <Discussion />
     </div>

@@ -8,7 +8,7 @@ const Chats = () => {
   return (
     <div>
       <Title>Messages</Title>
-      <div>
+      <div className='p-5'>
         <SearchField />
         <Button sign="Start New Chat" type={TYPE_BUTTON.NEPHRITE} />
       </div>
