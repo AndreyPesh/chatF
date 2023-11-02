@@ -1,13 +1,27 @@
+import { FormEvent, useState } from 'react';
 import Button from '../../../6_shared/buttons/Button';
 import { TYPE_BUTTON } from '../../../6_shared/enums/buttons';
 import Title from '../../../6_shared/titles/Title';
 
 const LoginForm = () => {
+
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+
+  const submitForm = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log('send');
+    
+    setIsLoading(true)
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 3000)
+  };
+
   return (
     <div className="pt-10 w-full sm:w-1/2 border-2">
       <Title>Welcome Back!</Title>
-      <p className='text-center text-gray-500'>Login to continue!</p>
-      <form>
+      <p className="text-center text-gray-500">Login to continue!</p>
+      <form onSubmit={submitForm}>
         <div className="relative p-4 pb-8 flex flex-col items-center">
           <label
             htmlFor="user_login"
@@ -41,7 +55,7 @@ const LoginForm = () => {
           </p>
         </div>
         <div className="m-auto pt-4 w-[300px]">
-          <Button sign="Log in" type={TYPE_BUTTON.LOGIN} />
+          <Button sign="Log in" type={TYPE_BUTTON.LOGIN} isLoading={isLoading}/>
         </div>
       </form>
     </div>

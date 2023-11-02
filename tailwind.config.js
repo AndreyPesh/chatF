@@ -49,6 +49,7 @@ export default {
   },
   plugins: [
     require('tailwind-scrollbar'),
+    require('tw-elements/dist/plugin.cjs')
   ],
 }
 
