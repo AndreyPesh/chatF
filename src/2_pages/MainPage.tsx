@@ -1,9 +1,10 @@
+import LoginForm from '../4_features/forms/login/LoginForm';
 
 const MainPage = () => {
   return (
-    <>
-      <div>Main</div>
-    </>
+    <div className="flex w-full justify-center">
+      <LoginForm />
+    </div>
   );
 };
 

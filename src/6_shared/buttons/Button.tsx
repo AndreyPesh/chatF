@@ -19,14 +19,16 @@ const Button: FC<ButtonProps> = ({ sign, type, handler }) => {
           'text-white': type === TYPE_BUTTON.NEPHRITE,
         },
         { 'border-2 border-red': type === TYPE_BUTTON.DANGER },
-        { 'text-red': type === TYPE_BUTTON.DANGER }
+        { 'text-red': type === TYPE_BUTTON.DANGER },
+        { 'bg-nephritis text-white': type === TYPE_BUTTON.LOGIN }
       )}
     >
       <span
         className={classNames(
           'mr-2 inline-flex w-[20px] h-[20px] bg-no-repeat bg-center',
           { 'bg-plus': type === TYPE_BUTTON.NEPHRITE },
-          { 'bg-block': type === TYPE_BUTTON.DANGER }
+          { 'bg-block': type === TYPE_BUTTON.DANGER },
+          { 'bg-login': type === TYPE_BUTTON.LOGIN }
         )}
       ></span>
       <span>{sign}</span>

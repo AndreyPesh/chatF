@@ -43,6 +43,7 @@ export default {
         'attach': "url('/actions/attach.svg')",
         'note': "url('/actions/note.svg')",
         'points': "url('/actions/points.svg')",
+        'login': "url('/icons/login.svg')",
       }
     },
   },
