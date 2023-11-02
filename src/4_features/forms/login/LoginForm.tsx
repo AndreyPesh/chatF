@@ -3,6 +3,9 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import Button from '../../../6_shared/buttons/Button';
 import { TYPE_BUTTON } from '../../../6_shared/enums/buttons';
 import Title from '../../../6_shared/titles/Title';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { loginFormSchema } from './validation/loginValidationSchema';
+import FormErrorMessage from '../../../6_shared/error/FormErrorMessage';
 
 interface LoginFormInputs {
   login: string;
@@ -15,7 +18,9 @@ const LoginForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginFormInputs>();
+  } = useForm<LoginFormInputs>({
+    resolver: yupResolver(loginFormSchema),
+  });
 
   const onSubmitForm: SubmitHandler<LoginFormInputs> = (data) => {
     try {
@@ -45,9 +50,7 @@ const LoginForm = () => {
             {...register('login')}
             className="block w-[300px] p-2.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-nephritis focus:border-nephritis"
           />
-          <p className="absolute bottom-1 pt-1 font-bold text-sm text-red">
-            * Incorrect login. Try again!
-          </p>
+          <FormErrorMessage message={errors.login?.message} />
         </div>
         <div className="relative p-4 pb-8 flex flex-col items-center">
           <label
@@ -62,9 +65,7 @@ const LoginForm = () => {
             {...register('password')}
             className="block w-[300px] p-2.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-nephritis focus:border-nephritis"
           />
-          <p className="absolute bottom-1 pt-1 font-bold text-sm text-red">
-            * Incorrect login. Try again!
-          </p>
+          <FormErrorMessage message={errors.password?.message} />
         </div>
         <div className="m-auto pt-4 w-[300px]">
           <Button
