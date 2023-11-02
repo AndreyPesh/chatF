@@ -6,11 +6,8 @@ import Title from '../../../6_shared/titles/Title';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { loginFormSchema } from './validation/loginValidationSchema';
 import FormErrorMessage from '../../../6_shared/error/FormErrorMessage';
-
-interface LoginFormInputs {
-  login: string;
-  password: string;
-}
+import { LoginFormInputs } from '../../../6_shared/api/interfaces/user';
+import { loginUserFetch } from '../../../6_shared/api/user/user';
 
 const LoginForm = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -22,10 +19,12 @@ const LoginForm = () => {
     resolver: yupResolver(loginFormSchema),
   });
 
-  const onSubmitForm: SubmitHandler<LoginFormInputs> = (data) => {
+  const onSubmitForm: SubmitHandler<LoginFormInputs> = async (data) => {
     try {
       setIsLoading(true);
-      console.log(data);
+      const response = await loginUserFetch(data);
+      console.log(response);
+      
     } catch (error) {
     } finally {
       setIsLoading(false);

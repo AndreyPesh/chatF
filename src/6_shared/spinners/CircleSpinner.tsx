@@ -4,8 +4,9 @@ const CircleSpinner: FC<{ quantity?: number }> = ({ quantity = 1 }) => {
   const circles = Array(quantity).fill('');
   return (
     <>
-      {circles.map(() => (
+      {circles.map((_, index) => (
         <div
+          key={index}
           className="mx-1 inline-block h-4 w-4 animate-[spinner-grow_0.75s_linear_infinite] rounded-full bg-grayish align-[-0.125em] text-secondary opacity-0 motion-reduce:animate-[spinner-grow_1.5s_linear_infinite]"
           role="status"
         >
