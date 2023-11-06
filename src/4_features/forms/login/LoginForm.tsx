@@ -31,7 +31,7 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="pt-10 w-full sm:w-1/2 border-2">
+    <div className="pt-10 w-full sm:w-1/2">
       <Title>Welcome Back!</Title>
       <p className="text-center text-gray-500">Login to continue!</p>
       <form onSubmit={handleSubmit(onSubmitForm)}>
@@ -74,7 +74,6 @@ const LoginForm = () => {
           />
         </div>
       </form>
-      <p className='mt-5 pr-4 font-bold text-end select-none underline cursor-pointer'>Don't have an account?</p>
     </div>
   );
 };

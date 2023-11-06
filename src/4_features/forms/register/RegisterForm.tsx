@@ -22,14 +22,14 @@ const RegisterForm = () => {
     try {
       setIsLoading(true);
       // const response = await loginUserFetch(data);
-      // console.log(response);
+      console.log(data);
     } catch (error) {
     } finally {
       setIsLoading(false);
     }
   };
   return (
-    <div className="pt-10 w-full sm:w-1/2 border-2">
+    <div className="pt-10 w-full sm:w-1/2">
       <Title>Register your account!</Title>
       <p className="text-center text-gray-500">Fill out the form!</p>
       <form onSubmit={handleSubmit(onSubmitForm)}>
@@ -38,10 +38,25 @@ const RegisterForm = () => {
             htmlFor="user_firstName"
             className="block mb-2 w-[300px] font-bold"
           >
-            Login:
+            First name:
           </label>
           <input
             id="user_firstName"
+            type="text"
+            {...register('firstName')}
+            className="block w-[300px] p-2.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-nephritis focus:border-nephritis"
+          />
+          <FormErrorMessage message={errors.firstName?.message} />
+        </div>
+        <div className="relative p-4 pb-8 flex flex-col items-center">
+          <label
+            htmlFor="user_lastName"
+            className="block mb-2 w-[300px] font-bold"
+          >
+            Last name:
+          </label>
+          <input
+            id="user_lastName"
             type="text"
             {...register('firstName')}
             className="block w-[300px] p-2.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-nephritis focus:border-nephritis"
@@ -72,9 +87,6 @@ const RegisterForm = () => {
           />
         </div>
       </form>
-      <p className="mt-5 pr-4 font-bold text-end select-none underline cursor-pointer">
-        Don't have an account?
-      </p>
     </div>
   );
 };

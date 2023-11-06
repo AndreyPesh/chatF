@@ -1,9 +1,9 @@
-import LoginForm from '../4_features/forms/login/LoginForm';
+import AuthFormToggle from '../3_widgets/toggles/AuthFormToggle';
 
 const MainPage = () => {
   return (
-    <div className="flex w-full justify-center">
-      <LoginForm />
+    <div className="w-full">
+      <AuthFormToggle />
     </div>
   );
 };
