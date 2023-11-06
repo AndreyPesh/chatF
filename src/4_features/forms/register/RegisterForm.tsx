@@ -7,6 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { registerFormSchema } from './validation/registerValidationSchema';
 import FormErrorMessage from '../../../6_shared/error/FormErrorMessage';
 import { RegisterFormInputs } from '../../../6_shared/api/interfaces/user';
+import { registerUserFetch } from '../../../6_shared/api/auth/auth';
 
 const RegisterForm = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -21,8 +22,8 @@ const RegisterForm = () => {
   const onSubmitForm: SubmitHandler<RegisterFormInputs> = async (data) => {
     try {
       setIsLoading(true);
-      // const response = await loginUserFetch(data);
-      console.log(data);
+      const response = await registerUserFetch(data);
+      console.log(response);
     } catch (error) {
     } finally {
       setIsLoading(false);

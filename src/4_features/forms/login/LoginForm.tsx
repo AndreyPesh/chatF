@@ -7,7 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { loginFormSchema } from './validation/loginValidationSchema';
 import FormErrorMessage from '../../../6_shared/error/FormErrorMessage';
 import { LoginFormInputs } from '../../../6_shared/api/interfaces/user';
-import { loginUserFetch } from '../../../6_shared/api/user/user';
+import { loginUserFetch } from '../../../6_shared/api/auth/auth';
 
 const LoginForm = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
