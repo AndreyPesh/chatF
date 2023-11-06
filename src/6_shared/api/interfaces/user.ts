@@ -8,5 +8,5 @@ export interface RegisterFormInputs {
   lastName: string;
   email: string;
   password: string;
-  repeatPassword: string;
+  confirmPassword: string;
 }

@@ -58,10 +58,26 @@ const RegisterForm = () => {
           <input
             id="user_lastName"
             type="text"
-            {...register('firstName')}
+            {...register('lastName')}
             className="block w-[300px] p-2.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-nephritis focus:border-nephritis"
           />
-          <FormErrorMessage message={errors.firstName?.message} />
+          <FormErrorMessage message={errors.lastName?.message} />
+        </div>
+        <div className="relative p-4 pb-8 flex flex-col items-center">
+          <label
+            htmlFor="user_email"
+            className="block mb-2 w-[300px] font-bold"
+          >
+            E-mail:
+          </label>
+          <input
+            id="user_email"
+            type="email"
+            autoComplete="on"
+            {...register('email')}
+            className="block w-[300px] p-2.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-nephritis focus:border-nephritis"
+          />
+          <FormErrorMessage message={errors.email?.message} />
         </div>
         <div className="relative p-4 pb-8 flex flex-col items-center">
           <label
@@ -78,6 +94,22 @@ const RegisterForm = () => {
             className="block w-[300px] p-2.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-nephritis focus:border-nephritis"
           />
           <FormErrorMessage message={errors.password?.message} />
+        </div>
+        <div className="relative p-4 pb-8 flex flex-col items-center">
+          <label
+            htmlFor="user_confirmPassword"
+            className="block mb-2 w-[300px] font-bold"
+          >
+            Confirm password:
+          </label>
+          <input
+            id="user_confirmPassword"
+            type="password"
+            autoComplete="on"
+            {...register('confirmPassword')}
+            className="block w-[300px] p-2.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-nephritis focus:border-nephritis"
+          />
+          <FormErrorMessage message={errors.confirmPassword?.message} />
         </div>
         <div className="m-auto pt-4 w-[300px]">
           <Button
