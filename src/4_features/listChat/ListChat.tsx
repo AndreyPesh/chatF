@@ -1,17 +1,13 @@
 import { useState } from 'react';
 import PreviewChat from './ui/PreviewChat';
 
-const fakeArrayChat = Array(5).fill('');
+const fakeArrayChat = Array(8).fill('');
 
 const ListChat = () => {
   const [currentChat, setCurrentChat] = useState<number | null>(null);
 
-  // const openChatHandler = (id: number) => {
-  //   console.log(id);
-  // };
-
   return (
-    <div className="max-w-[370px]">
+    <div className="max-w-[390px] pb-[260px] h-[100vh] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-light">
       {fakeArrayChat.map((_, index) => (
         <PreviewChat
           key={index}

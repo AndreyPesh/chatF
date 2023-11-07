@@ -1,9 +1,10 @@
+import AuthFormToggle from '../3_widgets/toggles/AuthFormToggle';
 
 const MainPage = () => {
   return (
-    <>
-      <div>Main</div>
-    </>
+    <div className="w-full">
+      <AuthFormToggle />
+    </div>
   );
 };
 

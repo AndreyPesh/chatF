@@ -10,9 +10,11 @@ export default {
         'dark': '#465352',
         'concrete': '#758A89',
         'grayish': "#EAF1F1",
+        'light-gray': '#EEF1F1',
         'light': '#E3E8E7',
         'nephritis': '#329993',
         'light-nephritis': '#E8F7F7',
+        'light-green': '#00B207',
         'red': '#DD0000'
       },
       backgroundImage: {
@@ -24,10 +26,30 @@ export default {
         'profile_active': "url('/icons/profile_active.svg')",
         'logout': "url('/icons/logout.svg')",
         'search': "url('/icons/search.svg')",
-        'plus': "url('/icons/plus.svg')"
+        'plus': "url('/icons/plus.svg')",
+        'call': "url('/icons/call.svg')",
+        'video': "url('/icons/video.svg')",
+        'option': "url('/icons/points.svg')",
+        'read': "url('/icons/read_status.svg')",
+        'unread': "url('/icons/unread_status.svg')",
+        'send': "url('/icons/send.svg')",
+        'file': "url('/icons/file.svg')",
+        'block': "url('/icons/block.svg')",
+        'arrow': "url('/icons/arrow.svg')",
+        'cross': "url('/icons/cross.svg')",
+        'video': "url('/actions/video.svg')",
+        'microphone': "url('/actions/microphone.svg')",
+        'smile': "url('/actions/smile.svg')",
+        'attach': "url('/actions/attach.svg')",
+        'note': "url('/actions/note.svg')",
+        'points': "url('/actions/points.svg')",
+        'login': "url('/icons/login.svg')",
       }
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar'),
+    require('tw-elements/dist/plugin.cjs')
+  ],
 }
 

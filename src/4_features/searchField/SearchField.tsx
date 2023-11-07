@@ -7,13 +7,13 @@ const SearchField = () => {
   };
 
   return (
-    <div className="pt-[24px]">
+    <div className="w-full">
       <form onSubmit={searchHandler}>
-        <div className="relative">
+        <div className="relative w-full">
           <input
             type="text"
             placeholder="Search for chats"
-            className="pl-[56px] py-[12px] block bg-gray-50 border border-gray-300 text-gray-900 rounded-full focus:outline-gray-500"
+            className="pl-[56px] py-[12px] block w-full bg-gray-50 border border-gray-300 text-gray-900 rounded-full focus:outline-gray-500"
           />
           <SearchButton />
         </div>

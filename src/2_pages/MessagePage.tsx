@@ -2,7 +2,7 @@ import Chats from '../3_widgets/chats/Chats';
 
 const MessagePage = () => {
   return (
-    <div className="py-[20px] px-[24px]">
+    <div className="relative flex w-full h-[100vh] border-r border-light ">
       <Chats />
     </div>
   );
