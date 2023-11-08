@@ -5,6 +5,7 @@ import ContactsPage from '../../2_pages/ContactsPage';
 import MessagePage from '../../2_pages/MessagePage';
 import NotFoundPage from '../../2_pages/NotFoundPage';
 import { ROUTES } from '../../6_shared/enums/routes';
+import ProtectedRoute from './ProtectedRoute';
 
 const listRoutes = [
   {
@@ -16,7 +17,11 @@ const listRoutes = [
       },
       {
         path: ROUTES.MESSAGES,
-        element: <MessagePage />,
+        element: (
+          <ProtectedRoute>
+            <MessagePage />
+          </ProtectedRoute>
+        ),
       },
       {
         path: ROUTES.CONTACTS,
