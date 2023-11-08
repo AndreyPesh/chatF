@@ -1,5 +1,5 @@
 export interface LoginFormInputs {
-  login: string;
+  email: string;
   password: string;
 }
 
