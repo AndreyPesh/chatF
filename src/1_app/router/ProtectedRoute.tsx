@@ -1,9 +1,10 @@
 import { FC, PropsWithChildren } from 'react';
 import { Navigate } from 'react-router';
+import useAuth from '../../6_shared/hooks/useAuth';
 
 const ProtectedRoute: FC<PropsWithChildren> = ({ children }) => {
-  let auth = { token: true };
-  return auth.token ? <>{children}</> : <Navigate to="/" />;
+  let { isAuth } = useAuth();
+  return isAuth ? <>{children}</> : <Navigate to="/" />;
 };
 
 export default ProtectedRoute;
