@@ -1,3 +1,4 @@
+import userApi from '../6_shared/api/user/userApi';
 import { axiosInstance } from '../6_shared/axios/axiosInstance';
 
 const ContactsPage = () => {
@@ -8,10 +9,17 @@ const ContactsPage = () => {
     console.log(user);
   };
 
+  const fetchParticipants = async () => {
+    const users = await userApi.getListParticipants()
+    console.log(users);
+    
+  } 
+
   return (
     <>
       <div>Contacts</div>
       <button onClick={fetchUser}>Get user</button>
+      <button onClick={fetchParticipants}>Get list user</button>
     </>
   );
 };

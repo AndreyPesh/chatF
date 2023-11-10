@@ -44,7 +44,27 @@ export default {
         'note': "url('/actions/note.svg')",
         'points': "url('/actions/points.svg')",
         'login': "url('/icons/login.svg')",
-      }
+      },
+      keyframes: {
+        fade_in: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' }
+        },
+        fade_out: {
+          '0%': { opacity: '1' },
+          '100%': { opacity: '0' }
+        },
+        flicker: {
+          '0%': { opacity: '1' },
+          '50%': { opacity: '0.5' },
+          '100%': { opacity: '1' }
+        }
+      },
+      animation: {
+        'appear': 'fade_in 0.3s linear',
+        'disappear': 'fade_out 0.3s linear forwards',
+        'flickering': 'flicker 1s linear infinite'
+      },
     },
   },
   plugins: [
