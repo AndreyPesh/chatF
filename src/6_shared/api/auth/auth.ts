@@ -1,4 +1,4 @@
-import { LoginFormInputs, RegisterFormInputs } from '../interfaces/user';
+import { LoginFormInputs, RegisterFormInputs } from './interfaces/user';
 import { axiosInstance } from '../../axios/axiosInstance';
 
 const LOGIN_URL = 'auth/login';

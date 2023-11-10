@@ -6,7 +6,7 @@ import Title from '../../../6_shared/titles/Title';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { loginFormSchema } from './validation/loginValidationSchema';
 import FormErrorMessage from '../../../6_shared/error/FormErrorMessage';
-import { LoginFormInputs } from '../../../6_shared/api/interfaces/user';
+import { LoginFormInputs } from '../../../6_shared/api/auth/interfaces/user';
 import { loginUserFetch } from '../../../6_shared/api/auth/auth';
 
 const LoginForm = () => {
