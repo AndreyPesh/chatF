@@ -1,8 +1,11 @@
 import { logoutUserFetch } from '../../6_shared/api/auth/auth';
+import useUserStore from '../../6_shared/hooks/store/useUserStore';
 
 const Logout = () => {
+  const { clearUserState } = useUserStore();
   const logoutHandler = async () => {
     await logoutUserFetch();
+    clearUserState();
   };
 
   return (

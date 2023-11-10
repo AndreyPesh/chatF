@@ -6,10 +6,13 @@ import Title from '../../../6_shared/titles/Title';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { loginFormSchema } from './validation/loginValidationSchema';
 import FormErrorMessage from '../../../6_shared/error/FormErrorMessage';
-import { LoginFormInputs } from '../../../6_shared/api/interfaces/user';
+import { LoginFormInputs } from '../../../6_shared/api/auth/interfaces/user';
 import { loginUserFetch } from '../../../6_shared/api/auth/auth';
+import { STATUS_CODE } from '../../../6_shared/api/enums/status';
+import useUserStore from '../../../6_shared/hooks/store/useUserStore';
 
 const LoginForm = () => {
+  const { setUserToState } = useUserStore();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const {
     register,
@@ -23,6 +26,9 @@ const LoginForm = () => {
     try {
       setIsLoading(true);
       const response = await loginUserFetch(data);
+      if (response.status === STATUS_CODE.OK) {
+        setUserToState(response.data);
+      }
       console.log(response);
     } catch (error) {
     } finally {

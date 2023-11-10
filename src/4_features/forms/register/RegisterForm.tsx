@@ -6,10 +6,16 @@ import Title from '../../../6_shared/titles/Title';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { registerFormSchema } from './validation/registerValidationSchema';
 import FormErrorMessage from '../../../6_shared/error/FormErrorMessage';
-import { RegisterFormInputs } from '../../../6_shared/api/interfaces/user';
-import { registerUserFetch } from '../../../6_shared/api/auth/auth';
+import { RegisterFormInputs } from '../../../6_shared/api/auth/interfaces/user';
+import {
+  loginUserFetch,
+  registerUserFetch,
+} from '../../../6_shared/api/auth/auth';
+import { STATUS_CODE } from '../../../6_shared/api/enums/status';
+import useUserStore from '../../../6_shared/hooks/store/useUserStore';
 
 const RegisterForm = () => {
+  const { setUserToState } = useUserStore();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const {
     register,
@@ -23,7 +29,18 @@ const RegisterForm = () => {
     try {
       setIsLoading(true);
       const response = await registerUserFetch(data);
-      console.log(response);
+      if (
+        response.status === STATUS_CODE.CREATED &&
+        response.data.isUserCreated
+      ) {
+        const response = await loginUserFetch({
+          email: data.email,
+          password: data.password,
+        });
+        if (response.status === STATUS_CODE.OK) {
+          setUserToState(response.data);
+        }
+      }
     } catch (error) {
     } finally {
       setIsLoading(false);

@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import interlocutorDescription from '../../3_widgets/interlocutor/state/slice';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import interlocutorDescription from '../../3_widgets/interlocutor/state/slice';
+import user from '../../6_shared/store/user/slice';
 
 export const store = configureStore({
   reducer: {
+    user,
     interlocutorDescription,
   },
 });

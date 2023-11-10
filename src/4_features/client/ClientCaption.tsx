@@ -1,4 +1,4 @@
-import useInterlocutorDescriptionState from '../../6_shared/hooks/useInterlocutorDescriptionState';
+import useInterlocutorDescriptionState from '../../6_shared/hooks/store/useInterlocutorDescriptionState';
 import StatusClient from '../statusClient/StatusClient';
 import ActionClient from './ui/ActionClient';
 
