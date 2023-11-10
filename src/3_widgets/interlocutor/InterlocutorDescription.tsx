@@ -2,7 +2,7 @@ import InterlocutorInfo from '../../4_features/interlocutor/InterlocutorInfo';
 import ImageList from '../../4_features/interlocutor/ImageList';
 import ListRecentFiles from '../../4_features/interlocutor/ListRecentFiles';
 import Notifications from '../../4_features/interlocutor/Notifications';
-import useInterlocutorDescriptionState from '../../6_shared/hooks/useInterlocutorDescriptionState';
+import useInterlocutorDescriptionState from '../../6_shared/hooks/store/useInterlocutorDescriptionState';
 import classNames from 'classnames';
 import Button from '../../6_shared/buttons/Button';
 import { TYPE_BUTTON } from '../../6_shared/enums/buttons';

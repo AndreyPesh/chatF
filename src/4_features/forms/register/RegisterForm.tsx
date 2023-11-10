@@ -12,8 +12,10 @@ import {
   registerUserFetch,
 } from '../../../6_shared/api/auth/auth';
 import { STATUS_CODE } from '../../../6_shared/api/enums/status';
+import useUserStore from '../../../6_shared/hooks/store/useUserStore';
 
 const RegisterForm = () => {
+  const { setUserToState } = useUserStore();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const {
     register,
@@ -31,7 +33,13 @@ const RegisterForm = () => {
         response.status === STATUS_CODE.CREATED &&
         response.data.isUserCreated
       ) {
-        await loginUserFetch({ email: data.email, password: data.password });
+        const response = await loginUserFetch({
+          email: data.email,
+          password: data.password,
+        });
+        if (response.status === STATUS_CODE.OK) {
+          setUserToState(response.data);
+        }
       }
     } catch (error) {
     } finally {
