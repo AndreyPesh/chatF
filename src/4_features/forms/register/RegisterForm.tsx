@@ -7,7 +7,11 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { registerFormSchema } from './validation/registerValidationSchema';
 import FormErrorMessage from '../../../6_shared/error/FormErrorMessage';
 import { RegisterFormInputs } from '../../../6_shared/api/auth/interfaces/user';
-import { registerUserFetch } from '../../../6_shared/api/auth/auth';
+import {
+  loginUserFetch,
+  registerUserFetch,
+} from '../../../6_shared/api/auth/auth';
+import { STATUS_CODE } from '../../../6_shared/api/enums/status';
 
 const RegisterForm = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -23,7 +27,12 @@ const RegisterForm = () => {
     try {
       setIsLoading(true);
       const response = await registerUserFetch(data);
-      console.log(response);
+      if (
+        response.status === STATUS_CODE.CREATED &&
+        response.data.isUserCreated
+      ) {
+        await loginUserFetch({ email: data.email, password: data.password });
+      }
     } catch (error) {
     } finally {
       setIsLoading(false);

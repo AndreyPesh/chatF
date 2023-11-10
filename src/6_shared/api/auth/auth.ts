@@ -14,7 +14,10 @@ export const loginUserFetch = async (loginUserData: LoginFormInputs) => {
 export const registerUserFetch = async (
   registerUserData: RegisterFormInputs
 ) => {
-  const response = await axiosInstance.post(REGISTER_URL, registerUserData);
+  const response = await axiosInstance.post<{ isUserCreated: boolean }>(
+    REGISTER_URL,
+    registerUserData
+  );
   return response;
 };
 
