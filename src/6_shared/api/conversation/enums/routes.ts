@@ -1,3 +1,3 @@
 export const enum CONVERSATION_ROUTE {
-  CREATE_CONVERSATION = 'conversation/create',
+  CREATE_CONVERSATION = '/conversation/create',
 }

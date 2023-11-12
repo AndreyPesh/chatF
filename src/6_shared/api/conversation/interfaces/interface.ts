@@ -1,4 +1,4 @@
-export interface InterlocutorData {
+export interface InterlocutorsData {
   userId: string;
   participantId: string;
 }
