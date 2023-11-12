@@ -3,14 +3,17 @@ import './styles/index.css';
 import { router } from './router/listRoutes';
 import { CookiesProvider } from 'react-cookie';
 import QueryProvider from './providers/QueryProvider';
+import InitUserState from './init/InitUserState';
 
 const App = () => {
   return (
-    <QueryProvider>
-      <CookiesProvider>
-        <RouterProvider router={router} />
-      </CookiesProvider>
-    </QueryProvider>
+    <InitUserState>
+      <QueryProvider>
+        <CookiesProvider>
+          <RouterProvider router={router} />
+        </CookiesProvider>
+      </QueryProvider>
+    </InitUserState>
   );
 };
 

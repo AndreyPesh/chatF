@@ -12,6 +12,7 @@ class ConversationAPI {
   }
 
   async getListConversation(userId: string) {
+    if (!userId) return [];
     const response = await axiosInstance.get(
       CONVERSATION_ROUTE.LIST_CONVERSATION + `/${userId}`
     );
