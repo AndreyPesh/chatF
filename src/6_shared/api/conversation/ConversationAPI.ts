@@ -10,6 +10,13 @@ class ConversationAPI {
     );
     return response;
   }
+
+  async getListConversation(userId: string) {
+    const response = await axiosInstance.get(
+      CONVERSATION_ROUTE.LIST_CONVERSATION + `/${userId}`
+    );
+    return response.data;
+  }
 }
 
 export default new ConversationAPI();
