@@ -10,7 +10,7 @@ const SearchUserModal = () => {
     <Modal management={useSearchUserModalStore}>
       <h1>Search user</h1>
       {participantList?.map((participant) => (
-        <ParticipantPreview data={participant} />
+        <ParticipantPreview key={participant.id} data={participant} />
       ))}
     </Modal>
   );
