@@ -1,4 +1,7 @@
 import { ROLE_DIALOGUE_PARTICIPANTS } from '../../6_shared/enums/roles';
+import useQueryConversation from '../../6_shared/hooks/conversation/useQueryConversation';
+import useConversationStore from '../../6_shared/hooks/store/useConversationStore';
+import useUserStore from '../../6_shared/hooks/store/useUserStore';
 import { MessageData } from '../../6_shared/interfaces/message';
 import InterlocutorMessage from '../messages/InterlocutorMessage';
 import SendMessageField from '../messages/SendMessageField';
@@ -43,6 +46,12 @@ const fakeDiscussion: Array<MessageData> = [
 ];
 
 const Discussion = () => {
+  const { user } = useUserStore();
+  const { conversationList } = useQueryConversation(user.id);
+  const { conversation } = useConversationStore();
+  console.log(conversationList);
+  console.log(conversation.activeId);
+
   return (
     <div className="w-full p-5 pb-0 bg-light-gray">
       {fakeDiscussion.map(({ id, userPhotoUrl, message, time, role }) => {

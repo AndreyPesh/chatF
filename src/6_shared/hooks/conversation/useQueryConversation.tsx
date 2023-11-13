@@ -3,10 +3,10 @@ import ConversationAPI from '../../api/conversation/ConversationAPI';
 
 const CONVERSATION_LIST_KEY = 'list_conversations';
 
-const useQueryConversation = (id: string) => {
+const useQueryConversation = (userId: string) => {
   const { data: conversationList } = useQuery({
-    queryKey: [CONVERSATION_LIST_KEY, id],
-    queryFn: () => ConversationAPI.getListConversation(id),
+    queryKey: [CONVERSATION_LIST_KEY, userId],
+    queryFn: () => ConversationAPI.getListConversation(userId),
   });
   return {
     conversationList,
