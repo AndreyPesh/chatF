@@ -17,6 +17,8 @@ export interface ConversationUserData {
   firstName: string;
   lastName: string;
   email: string;
+  isParticipant: boolean;
+  fullName: string;
 }
 
 export interface ConversationData {

@@ -9,8 +9,7 @@ const ParticipantName: FC<ParticipantNameProps> = ({ participant }) => {
   if (!participant) {
     return <h2 className="font-bold font-4">User</h2>;
   }
-  const participantName = participant.firstName + participant.lastName;
-  return <h2 className="font-bold font-4">{participantName}</h2>;
+  return <h2 className="font-bold font-4">{participant.fullName}</h2>;
 };
 
 export default ParticipantName;
