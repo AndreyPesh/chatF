@@ -1,6 +1,6 @@
 import { axiosInstance } from '../../axios/axiosInstance';
 import { CONVERSATION_ROUTE } from './enums/routes';
-import { InterlocutorsData } from './interfaces/interface';
+import { ConversationData, InterlocutorsData } from './interfaces/interface';
 
 class ConversationAPI {
   async createConversation(interlocutors: InterlocutorsData) {
@@ -9,6 +9,14 @@ class ConversationAPI {
       interlocutors
     );
     return response;
+  }
+
+  async getListConversation(userId: string) {
+    if (!userId) return [];
+    const response = await axiosInstance.get<ConversationData[]>(
+      CONVERSATION_ROUTE.LIST_CONVERSATION + `/${userId}`
+    );
+    return response.data;
   }
 }
 

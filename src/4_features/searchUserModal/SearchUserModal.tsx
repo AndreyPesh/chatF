@@ -7,9 +7,9 @@ import { InterlocutorsData } from '../../6_shared/api/conversation/interfaces/in
 import ConversationAPI from '../../6_shared/api/conversation/ConversationAPI';
 
 const SearchUserModal = () => {
+  const { user } = useUserStore();
   const { closeModal } = useSearchUserModalStore();
   const { participantList } = useQueryParticipant();
-  const { user } = useUserStore();
 
   const startChatHandler = async (interlocutors: InterlocutorsData) => {
     try {
