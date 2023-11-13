@@ -12,7 +12,10 @@ const ClientCaption = () => {
       >
         <img src="/avatars/Robert.png" alt="Client photo" />
       </div>
-      <div onClick={showInterlocutorDescription} className="pl-[10px] grow cursor-pointer">
+      <div
+        onClick={showInterlocutorDescription}
+        className="pl-[10px] grow cursor-pointer"
+      >
         <h2 className="font-bold">Robert Fox</h2>
         <StatusClient />
       </div>

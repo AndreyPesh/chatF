@@ -1,13 +1,14 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { ConversationUserData } from '../../api/conversation/interfaces/interface';
 
 export interface ConversationState {
   activeId: string | null;
-  participantId: string | null;
+  participantData: ConversationUserData | null;
 }
 
 const initialConversationState: ConversationState = {
   activeId: null,
-  participantId: null,
+  participantData: null,
 };
 
 export const conversationSlice = createSlice({
