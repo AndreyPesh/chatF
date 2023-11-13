@@ -1,25 +1,21 @@
-import { Dispatch, FC, SetStateAction } from 'react';
+import { FC } from 'react';
 import classNames from 'classnames';
 import StatusMessage from '../../statusMessage/StatusMessage';
 import { ConversationData } from '../../../6_shared/api/conversation/interfaces/interface';
 import ParticipantName from './ParticipantName';
+import useConversationStore from '../../../6_shared/hooks/store/useConversationStore';
 
 interface PreviewChatProps {
   conversation: ConversationData;
-  isActive: boolean;
-  openChatHandler: Dispatch<SetStateAction<string | null>>;
 }
 
-const PreviewChat: FC<PreviewChatProps> = ({
-  conversation,
-  isActive,
-  openChatHandler,
-}) => {
+const PreviewChat: FC<PreviewChatProps> = ({ conversation }) => {
+  const { conversation: chat, setActiveConversation } = useConversationStore();
   const participant = conversation.users.find((user) => user.isParticipant);
-
+  const isActive = chat.activeId === conversation.id;
   return (
     <div
-      onClick={() => openChatHandler(conversation.id)}
+      onClick={() => setActiveConversation({ id: conversation.id })}
       className={classNames('pl-6 pt-6 pr-6 cursor-pointer', {
         'border-l-[6px] border-l-nephritis bg-light-nephritis': isActive,
         'border-l-[6px] border-l-white': !isActive,
