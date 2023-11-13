@@ -13,9 +13,12 @@ const PreviewChat: FC<PreviewChatProps> = ({ conversation }) => {
   const { conversation: chat, setActiveConversation } = useConversationStore();
   const participant = conversation.users.find((user) => user.isParticipant);
   const isActive = chat.activeId === conversation.id;
+  const participantId = participant?.id ?? null;
   return (
     <div
-      onClick={() => setActiveConversation({ id: conversation.id })}
+      onClick={() =>
+        setActiveConversation({ activeId: conversation.id, participantId })
+      }
       className={classNames('pl-6 pt-6 pr-6 cursor-pointer', {
         'border-l-[6px] border-l-nephritis bg-light-nephritis': isActive,
         'border-l-[6px] border-l-white': !isActive,

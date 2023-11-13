@@ -2,10 +2,12 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 export interface ConversationState {
   activeId: string | null;
+  participantId: string | null;
 }
 
 const initialConversationState: ConversationState = {
   activeId: null,
+  participantId: null,
 };
 
 export const conversationSlice = createSlice({
@@ -14,10 +16,10 @@ export const conversationSlice = createSlice({
   reducers: {
     setActiveConversation: (
       state,
-      action: PayloadAction<{ id: string | null }>
+      action: PayloadAction<ConversationState>
     ) => ({
       ...state,
-      activeId: action.payload.id,
+      ...action.payload,
     }),
   },
 });
