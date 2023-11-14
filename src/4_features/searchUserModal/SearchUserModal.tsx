@@ -3,17 +3,17 @@ import useSearchUserModalStore from './state/state';
 import useQueryParticipant from '../../6_shared/hooks/useQueryParticipant';
 import ParticipantPreview from '../../5_entities/participant/ParticipantPreview';
 import useUserStore from '../../6_shared/hooks/store/useUserStore';
-import { InterlocutorsData } from '../../6_shared/api/conversation/interfaces/interface';
-import ConversationAPI from '../../6_shared/api/conversation/ConversationAPI';
+import chatRoomAPI from '../../6_shared/api/chatRoom/chatRoomAPI';
+import { CreateRoomData } from '../../6_shared/api/chatRoom/types/chat-room.interfaces';
 
 const SearchUserModal = () => {
   const { user } = useUserStore();
   const { closeModal } = useSearchUserModalStore();
   const { participantList } = useQueryParticipant();
 
-  const startChatHandler = async (interlocutors: InterlocutorsData) => {
+  const startChatHandler = async (interlocutors: CreateRoomData) => {
     try {
-      await ConversationAPI.createConversation(interlocutors);
+      await chatRoomAPI.createChatRoom(interlocutors);
     } catch (error) {
       console.error(error);
     } finally {

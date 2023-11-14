@@ -13,7 +13,7 @@ import { useEffect, useState } from 'react';
 import { LoginLayout } from '../testComponents/LoginLayout';
 import { LoginForm } from '../testComponents/LoginForm';
 
-const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io();
+const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io('http://localhost:5000');
 
 const ContactsPage = () => {
   const [isConnected, setIsConnected] = useState(socket.connected);
