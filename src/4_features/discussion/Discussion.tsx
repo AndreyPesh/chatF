@@ -47,10 +47,10 @@ const fakeDiscussion: Array<MessageData> = [
 
 const Discussion = () => {
   const { user } = useUserStore();
-  const { conversationList } = useQueryConversation(user.id);
+  // const { conversationList } = useQueryConversation(user.id);
   const { conversation } = useConversationStore();
-  console.log(conversationList);
-  console.log(conversation.activeId);
+  // console.log(conversationList);
+  // console.log(conversation.activeId);
 
   return (
     <div className="w-full p-5 pb-0 bg-light-gray">
