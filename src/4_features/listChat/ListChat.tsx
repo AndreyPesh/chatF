@@ -6,6 +6,7 @@ import PreviewRoom from './ui/PreviewRoom';
 
 interface Room {
   host: { unitName: string };
+  name: string;
 }
 
 const ListChat = () => {
@@ -33,7 +34,7 @@ const ListChat = () => {
       {rooms &&
         rooms.length > 0 &&
         rooms.map((room) => (
-          <PreviewRoom key={room.host.unitName} name={room.host.unitName} />
+          <PreviewRoom key={room.host.unitName} name={room.name} />
         ))}
       {/* {conversationList &&
         conversationList.map((conversation) => (
