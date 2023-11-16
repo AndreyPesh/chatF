@@ -3,7 +3,7 @@ import useSearchUserModalStore from './state/state';
 import useQueryParticipant from '../../6_shared/hooks/useQueryParticipant';
 import ParticipantPreview from '../../5_entities/participant/ParticipantPreview';
 import useUserStore from '../../6_shared/hooks/store/useUserStore';
-import chatRoomAPI from '../../6_shared/api/chatRoom/chatRoomAPI';
+// import chatRoomAPI from '../../6_shared/api/chatRoom/chatRoomAPI';
 import { CreateRoomData } from '../../6_shared/api/chatRoom/types/chat-room.interfaces';
 import { socket } from '../../6_shared/socket/socket';
 import { useEffect } from 'react';
