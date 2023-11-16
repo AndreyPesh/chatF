@@ -17,6 +17,7 @@ const SearchUserModal = () => {
     try {
       socket.emit('join_room', {
         roomName: `${interlocutors.participantId} ${interlocutors.userId}`,
+        userId: interlocutors.userId,
         unit: {
           unitId: interlocutors.participantId,
           unitName: interlocutors.participantId,

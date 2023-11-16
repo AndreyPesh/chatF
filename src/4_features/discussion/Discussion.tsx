@@ -74,7 +74,7 @@ const Discussion = () => {
           />
         );
       })} */}
-      <SendMessageField />
+      {room.activeRoomName && <SendMessageField />}
     </div>
   );
 };

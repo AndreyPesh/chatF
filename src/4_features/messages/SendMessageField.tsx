@@ -6,8 +6,18 @@ import {
   useRef,
 } from 'react';
 import Actions from './ui/Actions';
+import useRoomStore from '../../6_shared/hooks/store/useRoomStore';
+import { socket } from '../../6_shared/socket/socket';
+
+// export interface Message {
+//   unit: Unit;
+//   timeSent: string;
+//   message: string;
+//   roomName: string;
+// }
 
 const SendMessageField = () => {
+  const { room } = useRoomStore();
   const [messageText, setMessageText] = useState('');
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -22,16 +32,18 @@ const SendMessageField = () => {
       if (textAreaRef.current) {
         textAreaRef.current.blur();
         setMessageText('');
-        console.log('send message :', messageText);
       }
     }
   };
 
   const onSendMessageHandler = (event: MouseEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log('send message :', messageText);
     setMessageText('');
   };
+
+  const sendMessageToServer = () => {
+    socket.emit('chat')
+  }
 
   return (
     <div className="sticky bottom-2 w-full bg-white border border-light rounded-[20px] overflow-hidden">
