@@ -3,10 +3,10 @@ import useSearchUserModalStore from './state/state';
 import useQueryParticipant from '../../6_shared/hooks/useQueryParticipant';
 import ParticipantPreview from '../../5_entities/participant/ParticipantPreview';
 import useUserStore from '../../6_shared/hooks/store/useUserStore';
-import chatRoomAPI from '../../6_shared/api/chatRoom/chatRoomAPI';
+// import chatRoomAPI from '../../6_shared/api/chatRoom/chatRoomAPI';
 import { CreateRoomData } from '../../6_shared/api/chatRoom/types/chat-room.interfaces';
 import { socket } from '../../6_shared/socket/socket';
-import { Socket } from 'socket.io-client';
+import { useEffect } from 'react';
 
 const SearchUserModal = () => {
   const { user } = useUserStore();
@@ -15,27 +15,31 @@ const SearchUserModal = () => {
 
   const startChatHandler = async (interlocutors: CreateRoomData) => {
     try {
-      // await chatRoomAPI.createChatRoom(interlocutors);
-      socket.connect();
-      socket.on('connection', (socket: Socket) => {
-        socket.emit('test', 'testData')
-      //   console.log('connect socket ', socket.id);
-      //   socket.emit('test', {
-      //     roomName: `${interlocutors.participantId} ${interlocutors.userId}`,
-      //     unit: {
-      //       unitId: interlocutors.participantId,
-      //       unitName: interlocutors.participantId,
-      //       socketId: socket.id,
-      //     },
-      //   });
+      socket.emit('join_room', {
+        roomName: `${interlocutors.participantId} ${interlocutors.userId}`,
+        userId: interlocutors.userId,
+        unit: {
+          unitId: interlocutors.participantId,
+          unitName: interlocutors.participantId,
+          socketId: socket.id,
+        },
       });
-      // socket.disconnect()
     } catch (error) {
       console.error(error);
     } finally {
       closeModal();
     }
   };
+
+  useEffect(() => {
+    socket.connect();
+    socket.on('connect', () => {
+      console.log('socket connected');
+    });
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
 
   return (
     <Modal management={useSearchUserModalStore}>
