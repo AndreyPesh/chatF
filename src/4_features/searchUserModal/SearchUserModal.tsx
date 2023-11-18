@@ -8,6 +8,17 @@ import { CreateRoomData } from '../../6_shared/api/chatRoom/types/chat-room.inte
 import { socket } from '../../6_shared/socket/socket';
 import { useEffect } from 'react';
 
+interface JoinRoomData {
+  roomName: string;
+  userId: string;
+  socketId: string;
+  participantId: string;
+  // unit: {
+  // unitId: string;
+  // unitName: string;
+  // };
+}
+
 const SearchUserModal = () => {
   const { user } = useUserStore();
   const { closeModal } = useSearchUserModalStore();
@@ -18,11 +29,11 @@ const SearchUserModal = () => {
       socket.emit('join_room', {
         roomName: `${interlocutors.participantId} ${interlocutors.userId}`,
         userId: interlocutors.userId,
-        unit: {
-          unitId: interlocutors.participantId,
-          unitName: interlocutors.participantId,
-          socketId: socket.id,
-        },
+        socketId: socket.id,
+        participantId: interlocutors.participantId,
+        // unit: {
+        //   unitId: interlocutors.participantId,
+        // },
       });
     } catch (error) {
       console.error(error);

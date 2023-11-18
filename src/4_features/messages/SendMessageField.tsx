@@ -4,6 +4,7 @@ import {
   useState,
   KeyboardEvent,
   useRef,
+  useEffect,
 } from 'react';
 import Actions from './ui/Actions';
 import useRoomStore from '../../6_shared/hooks/store/useRoomStore';
@@ -15,6 +16,11 @@ import { socket } from '../../6_shared/socket/socket';
 //   message: string;
 //   roomName: string;
 // }
+
+interface Message {
+  message: string;
+  roomName: string;
+}
 
 const SendMessageField = () => {
   const { room } = useRoomStore();
@@ -39,11 +45,35 @@ const SendMessageField = () => {
   const onSendMessageHandler = (event: MouseEvent<HTMLFormElement>) => {
     event.preventDefault();
     setMessageText('');
+    sendMessageToServer();
   };
 
+  useEffect(() => {
+    // socket.connect();
+    // return () => {
+    //   socket.disconnect();
+    // };
+    socket.on('connect', () => {
+      console.log('message connect');
+    });
+  }, []);
+
   const sendMessageToServer = () => {
-    socket.emit('chat')
-  }
+    if (socket.connected) {
+      socket.emit('chat', {
+        roomName: room.activeRoomName,
+        message: messageText,
+      });
+      console.log(`send by ${socket.connected}`);
+    } else {
+      socket.connect()
+      console.log('disconnect');
+      socket.emit('chat', {
+        roomName: room.activeRoomName,
+        message: messageText,
+      });
+    }
+  };
 
   return (
     <div className="sticky bottom-2 w-full bg-white border border-light rounded-[20px] overflow-hidden">
@@ -59,7 +89,7 @@ const SendMessageField = () => {
           ></textarea>
         </div>
         <div className="py-3 px-5 flex justify-between">
-          <div className='grow'>
+          <div className="grow">
             <Actions />
           </div>
           <button className="w-5 h-5 bg-send bg-no-repeat bg-center transition-all active:scale-90"></button>
