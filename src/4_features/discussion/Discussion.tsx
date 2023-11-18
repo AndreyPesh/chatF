@@ -8,6 +8,7 @@ import useRoomStore from '../../6_shared/hooks/store/useRoomStore';
 // import { MessageData } from '../../6_shared/interfaces/message';
 // import InterlocutorMessage from '../messages/InterlocutorMessage';
 import SendMessageField from '../messages/SendMessageField';
+import { useChatSocketCtx } from '../../6_shared/socket/socketContext';
 // import UserMessage from '../messages/UserMessage';
 
 // const fakeDiscussion: Array<MessageData> = [
@@ -49,6 +50,7 @@ import SendMessageField from '../messages/SendMessageField';
 // ];
 
 const Discussion = () => {
+  const { socket } = useChatSocketCtx();
   // const { user } = useUserStore();
   // const { conversationList } = useQueryConversation(user.id);
   // const { conversation } = useConversationStore();
@@ -60,6 +62,21 @@ const Discussion = () => {
   ]);
 
   useEffect(() => {
+
+
+    const chat = (response: unknown) => {
+      if (response) {
+        //@ts-ignore
+        // console.log(response.message);
+        //@ts-ignore
+        setMessages((prev) => [...prev, { message: response.message }]);
+      }
+    };
+
+    const listeningChatEvent = () => {
+      socket.on('chat', chat)
+    }
+
     // socket.on('connect', () => {
     //   socket.on('chat', (response: unknown) => {
     //     if (response) {
@@ -71,10 +88,20 @@ const Discussion = () => {
     //   });
     // });
 
-    // socket.connect();
+    socket.on('connect', listeningChatEvent);
     return () => {
-      // socket.disconnect()
-    }
+      socket.off('connect', listeningChatEvent);
+      socket.off('chat', chat)
+    };
+  }, []);
+
+  useEffect(() => {
+    // no-op if the socket is already connected
+    socket.connect();
+
+    return () => {
+      socket.disconnect();
+    };
   }, []);
 
   return (
@@ -98,7 +125,8 @@ const Discussion = () => {
         );
       })} */}
 
-      {messages && messages.map(({ message }, index) => <p key={index}>{message}</p>)}
+      {messages &&
+        messages.map(({ message }, index) => <p key={index}>{message}</p>)}
       {room.activeRoomName && <SendMessageField />}
     </div>
   );

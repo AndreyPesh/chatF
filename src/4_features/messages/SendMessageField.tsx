@@ -8,6 +8,7 @@ import {
 } from 'react';
 import Actions from './ui/Actions';
 import useRoomStore from '../../6_shared/hooks/store/useRoomStore';
+import { useChatSocketCtx } from '../../6_shared/socket/socketContext';
 // import { socket } from '../../6_shared/socket/socket';
 
 // export interface Message {
@@ -23,6 +24,7 @@ import useRoomStore from '../../6_shared/hooks/store/useRoomStore';
 // }
 
 const SendMessageField = () => {
+  const { socket } = useChatSocketCtx();
   const { room } = useRoomStore();
   const [messageText, setMessageText] = useState('');
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
@@ -49,21 +51,20 @@ const SendMessageField = () => {
   };
 
   useEffect(() => {
-    // socket.connect();
-    // return () => {
-    //   socket.disconnect();
-    // };
-    // socket.on('connect', () => {
-    //   console.log('message connect');
-    // });
+    // no-op if the socket is already connected
+    socket.connect();
+
+    return () => {
+      socket.disconnect();
+    };
   }, []);
 
   const sendMessageToServer = () => {
     // if (socket.connected) {
-      // socket.emit('chat', {
-      //   roomName: room.activeRoomName,
-      //   message: messageText,
-      // });
+      socket.emit('chat', {
+        roomName: room.activeRoomName,
+        message: messageText,
+      });
       // console.log(`send by ${socket.connected}`);
     // } else {
       // socket.connect()

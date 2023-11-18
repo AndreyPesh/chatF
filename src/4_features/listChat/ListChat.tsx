@@ -51,7 +51,7 @@ const ListChat = () => {
   useEffect(() => {
     const roomEvents = () => {
       if (user.id && socket.id) {
-        console.log(`get list chats ${socket.id} and user ${user.id}`);
+        // console.log(`get list chats ${socket.id} and user ${user.id}`);
         // socket.on(`rooms ${user.id}`, (rooms: Room[]) => {
         //   console.log(`rooms ${rooms}`);
         //   setRooms(() => {
@@ -63,7 +63,7 @@ const ListChat = () => {
           'list_rooms',
           { userId: user.id, socketId: socket.id },
           (rooms: Room[]) => {
-            console.log(`list rooms listener ${rooms}`);
+            // console.log(`list rooms listener ${rooms}`);
             setRooms(() => {
               return rooms;
             });
