@@ -1,11 +1,14 @@
 // import { ROLE_DIALOGUE_PARTICIPANTS } from '../../6_shared/enums/roles';
+import { useEffect, useState } from 'react';
 import useRoomStore from '../../6_shared/hooks/store/useRoomStore';
+// import { socket } from '../../6_shared/socket/socket';
 // import useQueryConversation from '../../6_shared/hooks/conversation/useQueryConversation';
 // import useConversationStore from '../../6_shared/hooks/store/useConversationStore';
 // import useUserStore from '../../6_shared/hooks/store/useUserStore';
 // import { MessageData } from '../../6_shared/interfaces/message';
 // import InterlocutorMessage from '../messages/InterlocutorMessage';
 import SendMessageField from '../messages/SendMessageField';
+import { useChatSocketCtx } from '../../6_shared/socket/socketContext';
 // import UserMessage from '../messages/UserMessage';
 
 // const fakeDiscussion: Array<MessageData> = [
@@ -47,12 +50,59 @@ import SendMessageField from '../messages/SendMessageField';
 // ];
 
 const Discussion = () => {
+  const { socket } = useChatSocketCtx();
   // const { user } = useUserStore();
   // const { conversationList } = useQueryConversation(user.id);
   // const { conversation } = useConversationStore();
   // console.log(conversationList);
   // console.log(conversation.activeId);
   const { room } = useRoomStore();
+  const [messages, setMessages] = useState<Array<{ message: string }>>([
+    { message: '' },
+  ]);
+
+  useEffect(() => {
+
+
+    const chat = (response: unknown) => {
+      if (response) {
+        //@ts-ignore
+        // console.log(response.message);
+        //@ts-ignore
+        setMessages((prev) => [...prev, { message: response.message }]);
+      }
+    };
+
+    const listeningChatEvent = () => {
+      socket.on('chat', chat)
+    }
+
+    // socket.on('connect', () => {
+    //   socket.on('chat', (response: unknown) => {
+    //     if (response) {
+    //       //@ts-ignore
+    //       // console.log(response.message);
+    //       //@ts-ignore
+    //       setMessages((prev) => ([...prev, {message: response.message}]));
+    //     }
+    //   });
+    // });
+
+    socket.on('connect', listeningChatEvent);
+    return () => {
+      socket.off('connect', listeningChatEvent);
+      socket.off('chat', chat)
+    };
+  }, []);
+
+  useEffect(() => {
+    // no-op if the socket is already connected
+    socket.connect();
+
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
 
   return (
     <div className="w-full min-h-full p-5 pb-0 bg-light-gray">
@@ -74,6 +124,9 @@ const Discussion = () => {
           />
         );
       })} */}
+
+      {messages &&
+        messages.map(({ message }, index) => <p key={index}>{message}</p>)}
       {room.activeRoomName && <SendMessageField />}
     </div>
   );

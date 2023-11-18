@@ -5,8 +5,19 @@ import ParticipantPreview from '../../5_entities/participant/ParticipantPreview'
 import useUserStore from '../../6_shared/hooks/store/useUserStore';
 // import chatRoomAPI from '../../6_shared/api/chatRoom/chatRoomAPI';
 import { CreateRoomData } from '../../6_shared/api/chatRoom/types/chat-room.interfaces';
-import { socket } from '../../6_shared/socket/socket';
+// import { socket } from '../../6_shared/socket/socket';
 import { useEffect } from 'react';
+
+// interface JoinRoomData {
+//   roomName: string;
+//   userId: string;
+//   socketId: string;
+//   participantId: string;
+//   // unit: {
+//   // unitId: string;
+//   // unitName: string;
+//   // };
+// }
 
 const SearchUserModal = () => {
   const { user } = useUserStore();
@@ -15,15 +26,12 @@ const SearchUserModal = () => {
 
   const startChatHandler = async (interlocutors: CreateRoomData) => {
     try {
-      socket.emit('join_room', {
-        roomName: `${interlocutors.participantId} ${interlocutors.userId}`,
-        userId: interlocutors.userId,
-        unit: {
-          unitId: interlocutors.participantId,
-          unitName: interlocutors.participantId,
-          socketId: socket.id,
-        },
-      });
+      // socket.emit('join_room', {
+      //   roomName: `${interlocutors.participantId} ${interlocutors.userId}`,
+      //   userId: interlocutors.userId,
+      //   socketId: socket.id,
+      //   participantId: interlocutors.participantId,
+      // });
     } catch (error) {
       console.error(error);
     } finally {
@@ -31,15 +39,15 @@ const SearchUserModal = () => {
     }
   };
 
-  useEffect(() => {
-    socket.connect();
-    socket.on('connect', () => {
-      console.log('socket connected');
-    });
-    return () => {
-      socket.disconnect();
-    };
-  }, []);
+  // useEffect(() => {
+  //   // socket.connect();
+  //   socket.on('connect', () => {
+  //     console.log('socket connected');
+  //   });
+  //   return () => {
+  //     // socket.disconnect();
+  //   };
+  // }, []);
 
   return (
     <Modal management={useSearchUserModalStore}>
