@@ -1,7 +1,7 @@
 // import { ROLE_DIALOGUE_PARTICIPANTS } from '../../6_shared/enums/roles';
 import { useEffect, useState } from 'react';
 import useRoomStore from '../../6_shared/hooks/store/useRoomStore';
-import { socket } from '../../6_shared/socket/socket';
+// import { socket } from '../../6_shared/socket/socket';
 // import useQueryConversation from '../../6_shared/hooks/conversation/useQueryConversation';
 // import useConversationStore from '../../6_shared/hooks/store/useConversationStore';
 // import useUserStore from '../../6_shared/hooks/store/useUserStore';
@@ -60,27 +60,22 @@ const Discussion = () => {
   ]);
 
   useEffect(() => {
-    socket.on('connect', () => {
-      socket.on('chat', (response: unknown) => {
-        if (response) {
-          //@ts-ignore
-          console.log(response.message);
-          //@ts-ignore
-          setMessages((prev) => ([...prev, {message: response.message}]));
-        }
-      });
-    });
+    // socket.on('connect', () => {
+    //   socket.on('chat', (response: unknown) => {
+    //     if (response) {
+    //       //@ts-ignore
+    //       // console.log(response.message);
+    //       //@ts-ignore
+    //       setMessages((prev) => ([...prev, {message: response.message}]));
+    //     }
+    //   });
+    // });
 
     // socket.connect();
     return () => {
       // socket.disconnect()
     }
   }, []);
-
-  useEffect(() => {
-    console.log(messages);
-    
-  }, [messages])
 
   return (
     <div className="w-full min-h-full p-5 pb-0 bg-light-gray">

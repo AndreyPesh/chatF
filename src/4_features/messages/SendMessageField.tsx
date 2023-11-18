@@ -8,7 +8,7 @@ import {
 } from 'react';
 import Actions from './ui/Actions';
 import useRoomStore from '../../6_shared/hooks/store/useRoomStore';
-import { socket } from '../../6_shared/socket/socket';
+// import { socket } from '../../6_shared/socket/socket';
 
 // export interface Message {
 //   unit: Unit;
@@ -17,10 +17,10 @@ import { socket } from '../../6_shared/socket/socket';
 //   roomName: string;
 // }
 
-interface Message {
-  message: string;
-  roomName: string;
-}
+// interface Message {
+//   message: string;
+//   roomName: string;
+// }
 
 const SendMessageField = () => {
   const { room } = useRoomStore();
@@ -59,20 +59,20 @@ const SendMessageField = () => {
   }, []);
 
   const sendMessageToServer = () => {
-    if (socket.connected) {
-      socket.emit('chat', {
-        roomName: room.activeRoomName,
-        message: messageText,
-      });
+    // if (socket.connected) {
+      // socket.emit('chat', {
+      //   roomName: room.activeRoomName,
+      //   message: messageText,
+      // });
       // console.log(`send by ${socket.connected}`);
-    } else {
+    // } else {
       // socket.connect()
       // console.log('disconnect');
-      socket.emit('chat', {
-        roomName: room.activeRoomName,
-        message: messageText,
-      });
-    }
+      // socket.emit('chat', {
+      //   roomName: room.activeRoomName,
+      //   message: messageText,
+      // });
+    // }
   };
 
   return (
