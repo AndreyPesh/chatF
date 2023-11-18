@@ -8,6 +8,7 @@ interface Room {
   id: string;
   // host: { unitName: string };
   roomName: string;
+  users: [{ id: string; fullName: string }];
 }
 
 const ListChat = () => {
@@ -48,7 +49,7 @@ const ListChat = () => {
     <div className="max-w-[390px] pb-[260px] h-[100vh] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-light">
       {rooms &&
         rooms.length > 0 &&
-        rooms.map((room) => <PreviewRoom key={room.id} name={room.roomName} />)}
+        rooms.map((room) => <PreviewRoom key={room.id} name={room.roomName} users={room.users} />)}
       {/* {conversationList &&
         conversationList.map((conversation) => (
           <PreviewChat key={conversation.id} conversation={conversation} />
