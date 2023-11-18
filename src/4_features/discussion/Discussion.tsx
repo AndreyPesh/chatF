@@ -71,7 +71,10 @@ const Discussion = () => {
       });
     });
 
-    socket.connect();
+    // socket.connect();
+    return () => {
+      // socket.disconnect()
+    }
   }, []);
 
   useEffect(() => {

@@ -53,9 +53,9 @@ const SendMessageField = () => {
     // return () => {
     //   socket.disconnect();
     // };
-    socket.on('connect', () => {
-      console.log('message connect');
-    });
+    // socket.on('connect', () => {
+    //   console.log('message connect');
+    // });
   }, []);
 
   const sendMessageToServer = () => {
@@ -64,10 +64,10 @@ const SendMessageField = () => {
         roomName: room.activeRoomName,
         message: messageText,
       });
-      console.log(`send by ${socket.connected}`);
+      // console.log(`send by ${socket.connected}`);
     } else {
-      socket.connect()
-      console.log('disconnect');
+      // socket.connect()
+      // console.log('disconnect');
       socket.emit('chat', {
         roomName: room.activeRoomName,
         message: messageText,

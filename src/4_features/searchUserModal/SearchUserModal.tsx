@@ -43,12 +43,12 @@ const SearchUserModal = () => {
   };
 
   useEffect(() => {
-    socket.connect();
+    // socket.connect();
     socket.on('connect', () => {
       console.log('socket connected');
     });
     return () => {
-      socket.disconnect();
+      // socket.disconnect();
     };
   }, []);
 
