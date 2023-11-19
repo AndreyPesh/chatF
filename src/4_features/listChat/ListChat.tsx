@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 // import PreviewChat from './ui/PreviewChat';
 import useUserStore from '../../6_shared/hooks/store/useUserStore';
-// import { socket } from '../../6_shared/socket/socket';
 import PreviewRoom from './ui/PreviewRoom';
 import { useChatSocketCtx } from '../../6_shared/socket/socketContext';
 
@@ -18,74 +17,22 @@ const ListChat = () => {
   const { user } = useUserStore();
   const [rooms, setRooms] = useState<Room[]>([]);
 
-  // const getRooms = () => {
-  //   console.log('get rooms');
-
-  //   socket.emit('list_rooms', { userId: user.id, socketId: socket.id });
-  // };
-
-  // useEffect(() => {
-  //   socket.connect();
-  //   if (user.id && socket.id) {
-  //     socket.on('connect', () => {
-  //       console.log(`get list chats ${socket.id} and user ${user.id}`);
-  //       socket.on(`rooms ${user.id}`, (rooms: Room[]) => {
-  //         console.log(`rooms ${rooms}`);
-
-  //         setRooms(() => {
-  //           return rooms;
-  //         });
-  //       });
-  //       socket.emit('list_rooms', { userId: user.id, socketId: socket.id });
-  //     });
-  //   }
-  //   console.log(`connect socket ${socket.connected} user ${user.id} socket id ${socket.id}`);
-
-  // return () => {
-  // socket.off('connect');
-  // socket.off('disconnect');
-  // socket.off('chat');
-  // };
-  // }, [socket.id, user.id]);
-
   useEffect(() => {
-    const roomEvents = () => {
-      if (user.id && socket.id) {
-        // console.log(`get list chats ${socket.id} and user ${user.id}`);
-        // socket.on(`rooms ${user.id}`, (rooms: Room[]) => {
-        //   console.log(`rooms ${rooms}`);
-        //   setRooms(() => {
-        //     return rooms;
-        //   });
-        // });
-        // setIsRoomListening(true);
-        socket.emit(
-          'list_rooms',
-          { userId: user.id, socketId: socket.id },
-          (rooms: Room[]) => {
-            // console.log(`list rooms listener ${rooms}`);
-            setRooms(() => {
-              return rooms;
-            });
-          }
-        );
-      }
-    };
-    socket.on('connect', roomEvents);
-
-    // console.log('ID ', socket.id + ' ' + socket.connected);
-
-    return () => {
-      socket.off('connect', roomEvents);
-      socket.off('list_rooms');
-      // socket.off(`rooms ${user.id}`);
-    };
+    if (socket.connected) {
+      socket.emit(
+        'list_rooms',
+        { userId: user.id, socketId: socket.id },
+        (rooms: Room[]) => {
+          setRooms(() => {
+            return rooms;
+          });
+        }
+      );
+    }
   }, [user.id, socket.connected]);
 
   useEffect(() => {
-    // no-op if the socket is already connected
     socket.connect();
-
     return () => {
       socket.disconnect();
     };
