@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { Room } from '../../socket/types/interface';
+import { Message, Room } from '../../socket/types/interface';
 
 export interface RoomState extends Room {
   activeRoomName: string | null;
@@ -21,9 +21,13 @@ export const roomSlice = createSlice({
       ...state,
       ...action.payload,
     }),
+    addMessage: (state, action: PayloadAction<Message>) => ({
+      ...state,
+      messages: [...state.messages, action.payload],
+    }),
   },
 });
 
-export const { setActiveRoom } = roomSlice.actions;
+export const { setActiveRoom, addMessage } = roomSlice.actions;
 
 export default roomSlice.reducer;
