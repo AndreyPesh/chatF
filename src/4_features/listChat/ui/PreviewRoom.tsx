@@ -5,12 +5,17 @@ import { Room } from '../../../6_shared/socket/types/interface';
 
 interface PreviewRoomProps extends Room {}
 
-const PreviewRoom: FC<PreviewRoomProps> = ({ id, roomName, users }) => {
+const PreviewRoom: FC<PreviewRoomProps> = ({
+  id,
+  roomName,
+  users,
+  messages,
+}) => {
   const { user } = useUserStore();
   const { setActiveRoom } = useRoomStore();
 
   const showDiscussion = () => {
-    setActiveRoom({ activeRoomName: roomName, id, users, roomName });
+    setActiveRoom({ activeRoomName: roomName, id, users, roomName, messages });
   };
 
   const participant = users.find((userData) => userData.id !== user.id);

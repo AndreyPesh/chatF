@@ -9,6 +9,7 @@ const initialRoomState: RoomState = {
   activeRoomName: null,
   id: '',
   roomName: '',
+  messages: [],
   users: [{ id: '', fullName: '' }],
 };
 

@@ -38,8 +38,14 @@ const ListChat = () => {
     <div className="max-w-[390px] pb-[260px] h-[100vh] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-light">
       {rooms &&
         rooms.length > 0 &&
-        rooms.map(({ id, roomName, users }) => (
-          <PreviewRoom key={id} roomName={roomName} id={id} users={users} />
+        rooms.map(({ id, roomName, users, messages }) => (
+          <PreviewRoom
+            key={id}
+            roomName={roomName}
+            id={id}
+            users={users}
+            messages={messages}
+          />
         ))}
       {/* {conversationList &&
         conversationList.map((conversation) => (
