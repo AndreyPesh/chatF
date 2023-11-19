@@ -9,6 +9,7 @@ import useRoomStore from '../../6_shared/hooks/store/useRoomStore';
 // import InterlocutorMessage from '../messages/InterlocutorMessage';
 import SendMessageField from '../messages/SendMessageField';
 import { useChatSocketCtx } from '../../6_shared/socket/socketContext';
+import { CHAT_EVENTS } from '../../6_shared/socket/events.enum';
 // import UserMessage from '../messages/UserMessage';
 
 // const fakeDiscussion: Array<MessageData> = [
@@ -70,15 +71,15 @@ const Discussion = () => {
     };
 
     const listeningChatEvent = () => {
-      socket.on('chat', chat);
+      socket.on(CHAT_EVENTS.CHAT, chat);
     };
 
     socket.on('connect', listeningChatEvent);
 
     return () => {
       socket.off('connect', listeningChatEvent);
-      socket.off('chat', chat);
-      socket.removeListener('chat', chat);
+      socket.off(CHAT_EVENTS.CHAT, chat);
+      socket.removeListener(CHAT_EVENTS.CHAT, chat);
     };
   }, []);
 

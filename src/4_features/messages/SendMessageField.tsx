@@ -4,12 +4,11 @@ import {
   useState,
   KeyboardEvent,
   useRef,
-  useEffect,
 } from 'react';
 import Actions from './ui/Actions';
 import useRoomStore from '../../6_shared/hooks/store/useRoomStore';
 import { useChatSocketCtx } from '../../6_shared/socket/socketContext';
-// import { socket } from '../../6_shared/socket/socket';
+import { CHAT_EVENTS } from '../../6_shared/socket/events.enum';
 
 // export interface Message {
 //   unit: Unit;
@@ -51,20 +50,10 @@ const SendMessageField = () => {
   };
 
   const sendMessageToServer = () => {
-    // if (socket.connected) {
-      socket.emit('chat', {
-        roomName: room.activeRoomName,
-        message: messageText,
-      });
-      // console.log(`send by ${socket.connected}`);
-    // } else {
-      // socket.connect()
-      // console.log('disconnect');
-      // socket.emit('chat', {
-      //   roomName: room.activeRoomName,
-      //   message: messageText,
-      // });
-    // }
+    socket.emit(CHAT_EVENTS.CHAT, {
+      roomName: room.activeRoomName,
+      message: messageText,
+    });
   };
 
   return (
@@ -87,7 +76,6 @@ const SendMessageField = () => {
           <button className="w-5 h-5 bg-send bg-no-repeat bg-center transition-all active:scale-90"></button>
         </div>
       </form>
-      <button onClick={() => socket.emit('count', {roomName: room.activeRoomName})}>Count sockets</button>
     </div>
   );
 };

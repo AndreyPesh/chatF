@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import useUserStore from '../../6_shared/hooks/store/useUserStore';
 import PreviewRoom from './ui/PreviewRoom';
 import { useChatSocketCtx } from '../../6_shared/socket/socketContext';
+import { CHAT_EVENTS } from '../../6_shared/socket/events.enum';
 
 interface Room {
   id: string;
@@ -20,7 +21,7 @@ const ListChat = () => {
   useEffect(() => {
     const getRoomHandler = () => {
       socket.emit(
-        'list_rooms',
+        CHAT_EVENTS.USER_LIST_ROOM,
         { userId: user.id, socketId: socket.id },
         (rooms: Room[]) => {
           setRooms(() => {

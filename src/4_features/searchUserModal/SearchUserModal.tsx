@@ -3,10 +3,9 @@ import useSearchUserModalStore from './state/state';
 import useQueryParticipant from '../../6_shared/hooks/useQueryParticipant';
 import ParticipantPreview from '../../5_entities/participant/ParticipantPreview';
 import useUserStore from '../../6_shared/hooks/store/useUserStore';
-// import chatRoomAPI from '../../6_shared/api/chatRoom/chatRoomAPI';
 import { CreateRoomData } from '../../6_shared/api/chatRoom/types/chat-room.interfaces';
-// import { socket } from '../../6_shared/socket/socket';
-import { useEffect } from 'react';
+import { useChatSocketCtx } from '../../6_shared/socket/socketContext';
+import { CHAT_EVENTS } from '../../6_shared/socket/events.enum';
 
 // interface JoinRoomData {
 //   roomName: string;
@@ -23,31 +22,22 @@ const SearchUserModal = () => {
   const { user } = useUserStore();
   const { closeModal } = useSearchUserModalStore();
   const { participantList } = useQueryParticipant();
+  const { socket } = useChatSocketCtx();
 
   const startChatHandler = async (interlocutors: CreateRoomData) => {
     try {
-      // socket.emit('join_room', {
-      //   roomName: `${interlocutors.participantId} ${interlocutors.userId}`,
-      //   userId: interlocutors.userId,
-      //   socketId: socket.id,
-      //   participantId: interlocutors.participantId,
-      // });
+      socket.emit(CHAT_EVENTS.JOIN_USER_TO_ROOM, {
+        roomName: `${interlocutors.participantId} ${interlocutors.userId}`,
+        userId: interlocutors.userId,
+        socketId: socket.id,
+        participantId: interlocutors.participantId,
+      });
     } catch (error) {
       console.error(error);
     } finally {
       closeModal();
     }
   };
-
-  // useEffect(() => {
-  //   // socket.connect();
-  //   socket.on('connect', () => {
-  //     console.log('socket connected');
-  //   });
-  //   return () => {
-  //     // socket.disconnect();
-  //   };
-  // }, []);
 
   return (
     <Modal management={useSearchUserModalStore}>
