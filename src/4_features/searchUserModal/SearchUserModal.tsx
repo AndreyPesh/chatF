@@ -6,17 +6,7 @@ import useUserStore from '../../6_shared/hooks/store/useUserStore';
 import { CreateRoomData } from '../../6_shared/api/chatRoom/types/chat-room.interfaces';
 import { useChatSocketCtx } from '../../6_shared/socket/socketContext';
 import { CHAT_EVENTS } from '../../6_shared/socket/events.enum';
-
-// interface JoinRoomData {
-//   roomName: string;
-//   userId: string;
-//   socketId: string;
-//   participantId: string;
-//   // unit: {
-//   // unitId: string;
-//   // unitName: string;
-//   // };
-// }
+import { createRoomName } from './utils/createRoomName';
 
 const SearchUserModal = () => {
   const { user } = useUserStore();
@@ -24,14 +14,27 @@ const SearchUserModal = () => {
   const { participantList } = useQueryParticipant();
   const { socket } = useChatSocketCtx();
 
-  const startChatHandler = async (interlocutors: CreateRoomData) => {
+  const startChatHandler = async ({
+    userId,
+    participantId,
+  }: CreateRoomData) => {
     try {
-      socket.emit(CHAT_EVENTS.JOIN_USER_TO_ROOM, {
-        roomName: `${interlocutors.participantId} ${interlocutors.userId}`,
-        userId: interlocutors.userId,
-        socketId: socket.id,
-        participantId: interlocutors.participantId,
-      });
+      socket.emit(
+        CHAT_EVENTS.JOIN_USER_TO_ROOM,
+        {
+          roomName: createRoomName({ userId, participantId }),
+          userId,
+          socketId: socket.id,
+          participantId,
+        },
+        (isRoomAdded: boolean) => {
+          if (isRoomAdded)
+            socket.emit(CHAT_EVENTS.USER_LIST_ROOM, {
+              socketId: socket.id,
+              userId: user.id,
+            });
+        }
+      );
     } catch (error) {
       console.error(error);
     } finally {

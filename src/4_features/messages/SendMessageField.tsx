@@ -40,6 +40,7 @@ const SendMessageField = () => {
         textAreaRef.current.blur();
         setMessageText('');
       }
+      sendMessageToServer();
     }
   };
 

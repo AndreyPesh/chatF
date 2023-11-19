@@ -7,7 +7,6 @@ import { CHAT_EVENTS } from '../../6_shared/socket/events.enum';
 
 interface Room {
   id: string;
-  // host: { unitName: string };
   roomName: string;
   users: [{ id: string; fullName: string }];
 }
@@ -24,9 +23,7 @@ const ListChat = () => {
         CHAT_EVENTS.USER_LIST_ROOM,
         { userId: user.id, socketId: socket.id },
         (rooms: Room[]) => {
-          setRooms(() => {
-            return rooms;
-          });
+          setRooms(() => rooms);
         }
       );
     };
@@ -53,7 +50,6 @@ const ListChat = () => {
         conversationList.map((conversation) => (
           <PreviewChat key={conversation.id} conversation={conversation} />
         ))} */}
-      {/* <button onClick={getRooms}>Get rooms</button> */}
     </div>
   );
 };
