@@ -26,7 +26,7 @@ const PreviewRoom: FC<PreviewRoomProps> = ({
       className="p-2 my-1 border border-gray-400 rounded-lg cursor-pointer"
     >
       <h1 className="text-center">
-        {participant ? participant.fullName : roomName}
+        {participant ? participant.fullName : id}
       </h1>
     </div>
   );
