@@ -18,7 +18,7 @@ const ListChat = () => {
   const [rooms, setRooms] = useState<Room[]>([]);
 
   useEffect(() => {
-    if (socket.connected) {
+    const getRoomHandler = () => {
       socket.emit(
         'list_rooms',
         { userId: user.id, socketId: socket.id },
@@ -28,15 +28,18 @@ const ListChat = () => {
           });
         }
       );
-    }
-  }, [user.id, socket.connected]);
-
-  useEffect(() => {
-    socket.connect();
-    return () => {
-      socket.disconnect();
     };
-  }, []);
+
+    if (socket.connected) {
+      getRoomHandler();
+    } else {
+      socket.on('connect', getRoomHandler);
+    }
+
+    return () => {
+      socket.off('connect', getRoomHandler);
+    };
+  }, [user.id, socket.id]);
 
   return (
     <div className="max-w-[390px] pb-[260px] h-[100vh] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-light">

@@ -62,45 +62,23 @@ const Discussion = () => {
   ]);
 
   useEffect(() => {
-
-
     const chat = (response: unknown) => {
       if (response) {
-        //@ts-ignore
-        // console.log(response.message);
         //@ts-ignore
         setMessages((prev) => [...prev, { message: response.message }]);
       }
     };
 
     const listeningChatEvent = () => {
-      socket.on('chat', chat)
-    }
-
-    // socket.on('connect', () => {
-    //   socket.on('chat', (response: unknown) => {
-    //     if (response) {
-    //       //@ts-ignore
-    //       // console.log(response.message);
-    //       //@ts-ignore
-    //       setMessages((prev) => ([...prev, {message: response.message}]));
-    //     }
-    //   });
-    // });
+      socket.on('chat', chat);
+    };
 
     socket.on('connect', listeningChatEvent);
+
     return () => {
       socket.off('connect', listeningChatEvent);
-      socket.off('chat', chat)
-    };
-  }, []);
-
-  useEffect(() => {
-    // no-op if the socket is already connected
-    socket.connect();
-
-    return () => {
-      socket.disconnect();
+      socket.off('chat', chat);
+      socket.removeListener('chat', chat);
     };
   }, []);
 

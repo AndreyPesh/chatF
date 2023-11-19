@@ -50,15 +50,6 @@ const SendMessageField = () => {
     sendMessageToServer();
   };
 
-  useEffect(() => {
-    // no-op if the socket is already connected
-    socket.connect();
-
-    return () => {
-      socket.disconnect();
-    };
-  }, []);
-
   const sendMessageToServer = () => {
     // if (socket.connected) {
       socket.emit('chat', {
@@ -96,6 +87,7 @@ const SendMessageField = () => {
           <button className="w-5 h-5 bg-send bg-no-repeat bg-center transition-all active:scale-90"></button>
         </div>
       </form>
+      <button onClick={() => socket.emit('count', {roomName: room.activeRoomName})}>Count sockets</button>
     </div>
   );
 };
