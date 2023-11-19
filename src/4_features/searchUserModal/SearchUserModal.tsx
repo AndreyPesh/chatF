@@ -5,7 +5,7 @@ import ParticipantPreview from '../../5_entities/participant/ParticipantPreview'
 import useUserStore from '../../6_shared/hooks/store/useUserStore';
 import { CreateRoomData } from '../../6_shared/api/chatRoom/types/chat-room.interfaces';
 import { useChatSocketCtx } from '../../6_shared/socket/socketContext';
-import { CHAT_EVENTS } from '../../6_shared/socket/events.enum';
+import { CHAT_EVENTS } from '../../6_shared/socket/types/events.enum';
 import { createRoomName } from './utils/createRoomName';
 
 const SearchUserModal = () => {

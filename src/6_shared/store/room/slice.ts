@@ -1,11 +1,15 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { Room } from '../../socket/types/interface';
 
-export interface RoomState {
+export interface RoomState extends Room {
   activeRoomName: string | null;
 }
 
 const initialRoomState: RoomState = {
   activeRoomName: null,
+  id: '',
+  roomName: '',
+  users: [{ id: '', fullName: '' }],
 };
 
 export const roomSlice = createSlice({

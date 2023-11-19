@@ -3,13 +3,8 @@ import { useEffect, useState } from 'react';
 import useUserStore from '../../6_shared/hooks/store/useUserStore';
 import PreviewRoom from './ui/PreviewRoom';
 import { useChatSocketCtx } from '../../6_shared/socket/socketContext';
-import { CHAT_EVENTS } from '../../6_shared/socket/events.enum';
-
-interface Room {
-  id: string;
-  roomName: string;
-  users: [{ id: string; fullName: string }];
-}
+import { CHAT_EVENTS } from '../../6_shared/socket/types/events.enum';
+import { Room } from '../../6_shared/socket/types/interface';
 
 const ListChat = () => {
   const { socket } = useChatSocketCtx();
@@ -43,8 +38,8 @@ const ListChat = () => {
     <div className="max-w-[390px] pb-[260px] h-[100vh] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-light">
       {rooms &&
         rooms.length > 0 &&
-        rooms.map((room) => (
-          <PreviewRoom key={room.id} name={room.roomName} users={room.users} />
+        rooms.map(({ id, roomName, users }) => (
+          <PreviewRoom key={id} roomName={roomName} id={id} users={users} />
         ))}
       {/* {conversationList &&
         conversationList.map((conversation) => (

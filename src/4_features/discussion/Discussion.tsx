@@ -6,7 +6,7 @@ import useRoomStore from '../../6_shared/hooks/store/useRoomStore';
 // import InterlocutorMessage from '../messages/InterlocutorMessage';
 import SendMessageField from '../messages/SendMessageField';
 import { useChatSocketCtx } from '../../6_shared/socket/socketContext';
-import { CHAT_EVENTS } from '../../6_shared/socket/events.enum';
+import { CHAT_EVENTS } from '../../6_shared/socket/types/events.enum';
 
 const Discussion = () => {
   const { socket } = useChatSocketCtx();

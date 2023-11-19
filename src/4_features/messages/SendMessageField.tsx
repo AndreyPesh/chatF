@@ -8,21 +8,11 @@ import {
 import Actions from './ui/Actions';
 import useRoomStore from '../../6_shared/hooks/store/useRoomStore';
 import { useChatSocketCtx } from '../../6_shared/socket/socketContext';
-import { CHAT_EVENTS } from '../../6_shared/socket/events.enum';
-
-// export interface Message {
-//   unit: Unit;
-//   timeSent: string;
-//   message: string;
-//   roomName: string;
-// }
-
-// interface Message {
-//   message: string;
-//   roomName: string;
-// }
+import { CHAT_EVENTS } from '../../6_shared/socket/types/events.enum';
+import useUserStore from '../../6_shared/hooks/store/useUserStore';
 
 const SendMessageField = () => {
+  const { user } = useUserStore();
   const { socket } = useChatSocketCtx();
   const { room } = useRoomStore();
   const [messageText, setMessageText] = useState('');
@@ -52,8 +42,10 @@ const SendMessageField = () => {
 
   const sendMessageToServer = () => {
     socket.emit(CHAT_EVENTS.CHAT, {
+      authorId: user.id,
       roomName: room.activeRoomName,
       message: messageText,
+      roomId: room.id,
     });
   };
 
