@@ -3,51 +3,44 @@ import useSearchUserModalStore from './state/state';
 import useQueryParticipant from '../../6_shared/hooks/useQueryParticipant';
 import ParticipantPreview from '../../5_entities/participant/ParticipantPreview';
 import useUserStore from '../../6_shared/hooks/store/useUserStore';
-// import chatRoomAPI from '../../6_shared/api/chatRoom/chatRoomAPI';
 import { CreateRoomData } from '../../6_shared/api/chatRoom/types/chat-room.interfaces';
-// import { socket } from '../../6_shared/socket/socket';
-import { useEffect } from 'react';
-
-// interface JoinRoomData {
-//   roomName: string;
-//   userId: string;
-//   socketId: string;
-//   participantId: string;
-//   // unit: {
-//   // unitId: string;
-//   // unitName: string;
-//   // };
-// }
+import { useChatSocketCtx } from '../../6_shared/socket/socketContext';
+import { CHAT_EVENTS } from '../../6_shared/socket/types/events.enum';
+import { createRoomName } from './utils/createRoomName';
 
 const SearchUserModal = () => {
   const { user } = useUserStore();
   const { closeModal } = useSearchUserModalStore();
   const { participantList } = useQueryParticipant();
+  const { socket } = useChatSocketCtx();
 
-  const startChatHandler = async (interlocutors: CreateRoomData) => {
+  const startChatHandler = async ({
+    userId,
+    participantId,
+  }: CreateRoomData) => {
     try {
-      // socket.emit('join_room', {
-      //   roomName: `${interlocutors.participantId} ${interlocutors.userId}`,
-      //   userId: interlocutors.userId,
-      //   socketId: socket.id,
-      //   participantId: interlocutors.participantId,
-      // });
+      socket.emit(
+        CHAT_EVENTS.JOIN_USER_TO_ROOM,
+        {
+          roomName: createRoomName({ userId, participantId }),
+          userId,
+          socketId: socket.id,
+          participantId,
+        },
+        (isRoomAdded: boolean) => {
+          if (isRoomAdded)
+            socket.emit(CHAT_EVENTS.USER_LIST_ROOM, {
+              socketId: socket.id,
+              userId: user.id,
+            });
+        }
+      );
     } catch (error) {
       console.error(error);
     } finally {
       closeModal();
     }
   };
-
-  // useEffect(() => {
-  //   // socket.connect();
-  //   socket.on('connect', () => {
-  //     console.log('socket connected');
-  //   });
-  //   return () => {
-  //     // socket.disconnect();
-  //   };
-  // }, []);
 
   return (
     <Modal management={useSearchUserModalStore}>

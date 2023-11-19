@@ -4,26 +4,15 @@ import {
   useState,
   KeyboardEvent,
   useRef,
-  useEffect,
 } from 'react';
 import Actions from './ui/Actions';
 import useRoomStore from '../../6_shared/hooks/store/useRoomStore';
 import { useChatSocketCtx } from '../../6_shared/socket/socketContext';
-// import { socket } from '../../6_shared/socket/socket';
-
-// export interface Message {
-//   unit: Unit;
-//   timeSent: string;
-//   message: string;
-//   roomName: string;
-// }
-
-// interface Message {
-//   message: string;
-//   roomName: string;
-// }
+import { CHAT_EVENTS } from '../../6_shared/socket/types/events.enum';
+import useUserStore from '../../6_shared/hooks/store/useUserStore';
 
 const SendMessageField = () => {
+  const { user } = useUserStore();
   const { socket } = useChatSocketCtx();
   const { room } = useRoomStore();
   const [messageText, setMessageText] = useState('');
@@ -41,6 +30,7 @@ const SendMessageField = () => {
         textAreaRef.current.blur();
         setMessageText('');
       }
+      sendMessageToServer();
     }
   };
 
@@ -50,30 +40,13 @@ const SendMessageField = () => {
     sendMessageToServer();
   };
 
-  useEffect(() => {
-    // no-op if the socket is already connected
-    socket.connect();
-
-    return () => {
-      socket.disconnect();
-    };
-  }, []);
-
   const sendMessageToServer = () => {
-    // if (socket.connected) {
-      socket.emit('chat', {
-        roomName: room.activeRoomName,
-        message: messageText,
-      });
-      // console.log(`send by ${socket.connected}`);
-    // } else {
-      // socket.connect()
-      // console.log('disconnect');
-      // socket.emit('chat', {
-      //   roomName: room.activeRoomName,
-      //   message: messageText,
-      // });
-    // }
+    socket.emit(CHAT_EVENTS.CHAT, {
+      authorId: user.id,
+      roomName: room.activeRoomName,
+      message: messageText,
+      roomId: room.id,
+    });
   };
 
   return (
