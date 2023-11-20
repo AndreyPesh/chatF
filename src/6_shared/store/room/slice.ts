@@ -29,9 +29,10 @@ export const roomSlice = createSlice({
         };
       }
     },
+    resetRoom: () => initialRoomState,
   },
 });
 
-export const { setActiveRoom, addMessage } = roomSlice.actions;
+export const { setActiveRoom, addMessage, resetRoom } = roomSlice.actions;
 
 export default roomSlice.reducer;

@@ -4,7 +4,9 @@ import useRoomStore from '../../../6_shared/hooks/store/useRoomStore';
 import useUserStore from '../../../6_shared/hooks/store/useUserStore';
 import { Room } from '../../../6_shared/socket/types/interface';
 import ParticipantName from './ParticipantName';
-import StatusMessage from '../../statusMessage/StatusMessage';
+// import StatusMessage from '../../statusMessage/StatusMessage';
+import UnreadMessageIndicator from './UnreadMessageIndicator';
+import { unreadMessageCounter } from '../utils/unreadMessageCounter';
 
 interface PreviewRoomProps extends Room {}
 
@@ -25,6 +27,7 @@ const PreviewRoom: FC<PreviewRoomProps> = ({
   const isActiveRoom = room.id === id;
   const lastMessage =
     messages.length >= 1 ? messages[messages.length - 1].content : '';
+  const numberOfUnreadMessages = unreadMessageCounter(messages, user.id);
 
   return (
     <div
@@ -47,7 +50,8 @@ const PreviewRoom: FC<PreviewRoomProps> = ({
         </div>
         <div className="pl-[28px] flex flex-col justify-between">
           <span className="font-medium text-concrete">2h</span>
-          <StatusMessage />
+          {/* <StatusMessage /> */}
+          <UnreadMessageIndicator value={numberOfUnreadMessages} />
         </div>
       </div>
     </div>
