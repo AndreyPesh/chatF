@@ -1,10 +1,11 @@
 import { FC } from 'react';
 import StatusMessage from '../statusMessage/StatusMessage';
+import TimeMessage from './ui/TimeMessage';
 
 interface UserMessageProps {
   userPhotoUrl: string;
   message: string;
-  time: string;
+  time: Date;
 }
 
 const UserMessage: FC<UserMessageProps> = ({ userPhotoUrl, message, time }) => {
@@ -16,9 +17,7 @@ const UserMessage: FC<UserMessageProps> = ({ userPhotoUrl, message, time }) => {
         </p>
         <div className="pt-2 w-full inline-flex justify-end items-center">
           <StatusMessage />
-          <span className="ml-2 inline-flex text-concrete">
-            {time} AM
-          </span>
+          <TimeMessage time={time} />
         </div>
       </div>
       <span className="mb-[29px] inline-flex w-12 h-12 self-end rounded-full overflow-hidden">

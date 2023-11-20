@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-// import PreviewChat from './ui/PreviewChat';
 import useUserStore from '../../6_shared/hooks/store/useUserStore';
 import PreviewRoom from './ui/PreviewRoom';
 import { useChatSocketCtx } from '../../6_shared/socket/socketContext';
@@ -14,6 +13,16 @@ const ListChat = () => {
 
   useEffect(() => {
     const getRoomHandler = () => {
+      socket.on(CHAT_EVENTS.UPDATE_ROOM_LISTENER, (updatedRoom: Room) => {
+        setRooms((prevRooms) => {
+          return prevRooms.map((currentRoom) => {
+            if (currentRoom.id === updatedRoom.id) {
+              currentRoom.messages = [...updatedRoom.messages];
+            }
+            return currentRoom;
+          });
+        });
+      });
       socket.emit(
         CHAT_EVENTS.USER_LIST_ROOM,
         { userId: user.id, socketId: socket.id },
@@ -26,11 +35,12 @@ const ListChat = () => {
     if (socket.connected) {
       getRoomHandler();
     } else {
-      socket.on('connect', getRoomHandler);
+      socket.on(CHAT_EVENTS.CONNECT, getRoomHandler);
     }
 
     return () => {
-      socket.off('connect', getRoomHandler);
+      socket.off(CHAT_EVENTS.CONNECT, getRoomHandler);
+      socket.off(CHAT_EVENTS.UPDATE_ROOM_LISTENER);
     };
   }, [user.id, socket.id]);
 
@@ -47,10 +57,6 @@ const ListChat = () => {
             messages={messages}
           />
         ))}
-      {/* {conversationList &&
-        conversationList.map((conversation) => (
-          <PreviewChat key={conversation.id} conversation={conversation} />
-        ))} */}
     </div>
   );
 };

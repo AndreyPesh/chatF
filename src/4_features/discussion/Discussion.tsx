@@ -14,9 +14,13 @@ const Discussion = () => {
   const { room, addNewMessage } = useRoomStore();
 
   useEffect(() => {
-    const chat = (message: Message) => {
+    const chat = (
+      message: Message,
+      { roomId, roomName }: { roomId: string; roomName: string }
+    ) => {
       if (message) {
         addNewMessage(message);
+        socket.emit(CHAT_EVENTS.UPDATE_ROOM_EMIT, { roomId, roomName });
       }
     };
 
@@ -35,24 +39,24 @@ const Discussion = () => {
 
   return (
     <div className="w-full min-h-full p-5 pb-0 bg-light-gray">
-      <h1>Name room: {room.id}</h1>
-      {room.messages.map(({ id, content, authorId }) => {
-        return authorId === user.id ? (
-          <UserMessage
-            key={id}
-            userPhotoUrl={'/avatars/Avatar1.png'}
-            message={content}
-            time={'time'}
-          />
-        ) : (
-          <InterlocutorMessage
-            key={id}
-            userPhotoUrl={'/avatars/Avatar1.png'}
-            message={content}
-            time={'time'}
-          />
-        );
-      })}
+      {room.activeRoomName &&
+        room.messages.map(({ id, content, authorId, createdAt }) => {
+          return authorId === user.id ? (
+            <UserMessage
+              key={id}
+              userPhotoUrl={'/avatars/Avatar1.png'}
+              message={content}
+              time={createdAt}
+            />
+          ) : (
+            <InterlocutorMessage
+              key={id}
+              userPhotoUrl={'/avatars/Avatar1.png'}
+              message={content}
+              time={createdAt}
+            />
+          );
+        })}
       {room.activeRoomName && <SendMessageField />}
     </div>
   );

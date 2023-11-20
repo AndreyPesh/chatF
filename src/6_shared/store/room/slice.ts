@@ -10,7 +10,7 @@ const initialRoomState: RoomState = {
   id: '',
   roomName: '',
   messages: [],
-  users: [{ id: '', fullName: '' }],
+  users: [{ id: '', fullName: '', isParticipant: false }],
 };
 
 export const roomSlice = createSlice({
@@ -21,10 +21,14 @@ export const roomSlice = createSlice({
       ...state,
       ...action.payload,
     }),
-    addMessage: (state, action: PayloadAction<Message>) => ({
-      ...state,
-      messages: [...state.messages, action.payload],
-    }),
+    addMessage: (state, action: PayloadAction<Message>) => {
+      if (state.id === action.payload.roomId) {
+        return {
+          ...state,
+          messages: [...state.messages, action.payload],
+        };
+      }
+    },
   },
 });
 

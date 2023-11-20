@@ -7,9 +7,15 @@ export interface Message {
   updatedAt: Date;
 }
 
+export interface UserInRoom {
+  id: string;
+  fullName: string;
+  isParticipant: boolean;
+}
+
 export interface Room {
   id: string;
   roomName: string;
-  users: [{ id: string; fullName: string }];
+  users: UserInRoom[];
   messages: Message[];
 }

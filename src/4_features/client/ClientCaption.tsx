@@ -1,15 +1,18 @@
-import useConversationStore from '../../6_shared/hooks/store/useConversationStore';
 import useInterlocutorDescriptionState from '../../6_shared/hooks/store/useInterlocutorDescriptionState';
+import useRoomStore from '../../6_shared/hooks/store/useRoomStore';
 import StatusClient from '../statusClient/StatusClient';
+import { DEFAULT_USERNAME } from './types/client.constants';
 import ActionClient from './ui/ActionClient';
 
 const ClientCaption = () => {
-  const { conversation } = useConversationStore();
+  const { room } = useRoomStore();
   const { showInterlocutorDescription } = useInterlocutorDescriptionState();
 
-  if (!conversation.activeId) {
+  if (!room.activeRoomName) {
     return null;
   }
+
+  const participant = room.users.find((user) => user.isParticipant);
 
   return (
     <div className="sticky top-0 py-6 px-8 flex w-full bg-white z-10">
@@ -23,7 +26,9 @@ const ClientCaption = () => {
         onClick={showInterlocutorDescription}
         className="pl-[10px] grow cursor-pointer"
       >
-        <h2 className="font-bold">{conversation.participantData?.fullName}</h2>
+        <h2 className="font-bold">
+          {participant ? participant.fullName : DEFAULT_USERNAME}
+        </h2>
         <StatusClient />
       </div>
       <div>
