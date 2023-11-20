@@ -1,8 +1,8 @@
 import { FC } from 'react';
-import { ConversationUserData } from '../../../6_shared/api/conversation/interfaces/interface';
+import { UserInRoom } from '../../../6_shared/socket/types/interface';
 
 interface ParticipantNameProps {
-  participant?: ConversationUserData;
+  participant?: UserInRoom;
 }
 
 const ParticipantName: FC<ParticipantNameProps> = ({ participant }) => {
