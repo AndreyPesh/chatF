@@ -38,7 +38,7 @@ const PreviewRoom: FC<PreviewRoomProps> = ({
         <div className="w-[58px] h-[58px] rounded-full overflow-hidden">
           <img src="/avatars/Avatar1.png" alt="user" />
         </div>
-        <div className="ml-[10px] max-w-[195px]">
+        <div className="ml-[10px] max-w-[195px] grow">
           <ParticipantName participant={participant} />
           <p className="max-h-[37px] font-regular text-dark leading-[18px] font-[14px] overflow-hidden">
             {/* Not too bad, just trying to catch up on some work. How about you? */}
