@@ -23,6 +23,8 @@ const PreviewRoom: FC<PreviewRoomProps> = ({
 
   const participant = users.find((userData) => userData.id !== user.id);
   const isActiveRoom = room.id === id;
+  const lastMessage =
+    messages.length > 1 ? messages[messages.length - 1].content : '';
 
   return (
     <div
@@ -39,7 +41,8 @@ const PreviewRoom: FC<PreviewRoomProps> = ({
         <div className="ml-[10px] max-w-[195px]">
           <ParticipantName participant={participant} />
           <p className="max-h-[37px] font-regular text-dark leading-[18px] font-[14px] overflow-hidden">
-            Not too bad, just trying to catch up on some work. How about you?
+            {/* Not too bad, just trying to catch up on some work. How about you? */}
+            {lastMessage}
           </p>
         </div>
         <div className="pl-[28px] flex flex-col justify-between">

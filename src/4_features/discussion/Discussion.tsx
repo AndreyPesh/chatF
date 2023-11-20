@@ -14,9 +14,13 @@ const Discussion = () => {
   const { room, addNewMessage } = useRoomStore();
 
   useEffect(() => {
-    const chat = (message: Message) => {
+    const chat = (
+      message: Message,
+      { roomId, roomName }: { roomId: string; roomName: string }
+    ) => {
       if (message) {
         addNewMessage(message);
+        socket.emit(CHAT_EVENTS.UPDATE_ROOM_EMIT, { roomId, roomName });
       }
     };
 
