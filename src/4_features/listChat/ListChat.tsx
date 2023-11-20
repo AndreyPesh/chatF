@@ -17,7 +17,7 @@ const ListChat = () => {
         setRooms((prevRooms) => {
           return prevRooms.map((currentRoom) => {
             if (currentRoom.id === updatedRoom.id) {
-              currentRoom.messages = updatedRoom.messages;
+              currentRoom.messages = [...updatedRoom.messages];
             }
             return currentRoom;
           });

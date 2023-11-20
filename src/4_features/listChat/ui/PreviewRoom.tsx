@@ -24,7 +24,7 @@ const PreviewRoom: FC<PreviewRoomProps> = ({
   const participant = users.find((userData) => userData.id !== user.id);
   const isActiveRoom = room.id === id;
   const lastMessage =
-    messages.length > 1 ? messages[messages.length - 1].content : '';
+    messages.length >= 1 ? messages[messages.length - 1].content : '';
 
   return (
     <div
