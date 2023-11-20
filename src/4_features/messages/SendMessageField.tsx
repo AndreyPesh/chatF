@@ -18,6 +18,10 @@ const SendMessageField = () => {
   const [messageText, setMessageText] = useState('');
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
+  const participant = room.users.find(
+    (memberChat) => memberChat.id !== user.id
+  );
+
   const onMessageHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
     event.preventDefault();
     const message = event.target.value;
@@ -40,6 +44,14 @@ const SendMessageField = () => {
     sendMessageToServer();
   };
 
+  const readMessage = () => {
+    socket.emit(CHAT_EVENTS.READ_MESSAGE_EMIT, {
+      roomName: room.roomName,
+      roomId: room.id,
+      authorId: participant?.id,
+    });
+  };
+
   const sendMessageToServer = () => {
     socket.emit(CHAT_EVENTS.CHAT, {
       authorId: user.id,
@@ -59,6 +71,7 @@ const SendMessageField = () => {
             className="p-5 inline-flex w-full min-h-[96px] resize-none caret-nephritis border-b-2 border-b-grayish focus:outline-none"
             onChange={onMessageHandler}
             onKeyDown={onKeydownHandler}
+            onFocus={readMessage}
             value={messageText}
           ></textarea>
         </div>

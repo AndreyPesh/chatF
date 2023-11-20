@@ -51,7 +51,7 @@ const PreviewRoom: FC<PreviewRoomProps> = ({
         <div className="pl-[28px] flex flex-col justify-between">
           <span className="font-medium text-concrete">2h</span>
           {/* <StatusMessage /> */}
-          <UnreadMessageIndicator value={numberOfUnreadMessages} />
+          <UnreadMessageIndicator value={numberOfUnreadMessages} roomId={id} />
         </div>
       </div>
     </div>
