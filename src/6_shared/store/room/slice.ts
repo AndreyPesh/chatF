@@ -10,7 +10,7 @@ const initialRoomState: RoomState = {
   id: '',
   roomName: '',
   messages: [],
-  users: [{ id: '', fullName: '' }],
+  users: [{ id: '', fullName: '', isParticipant: false }],
 };
 
 export const roomSlice = createSlice({

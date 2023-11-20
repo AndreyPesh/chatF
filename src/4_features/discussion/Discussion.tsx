@@ -39,22 +39,21 @@ const Discussion = () => {
 
   return (
     <div className="w-full min-h-full p-5 pb-0 bg-light-gray">
-      <h1>Name room: {room.id}</h1>
       {room.activeRoomName &&
-        room.messages.map(({ id, content, authorId }) => {
+        room.messages.map(({ id, content, authorId, createdAt }) => {
           return authorId === user.id ? (
             <UserMessage
               key={id}
               userPhotoUrl={'/avatars/Avatar1.png'}
               message={content}
-              time={'time'}
+              time={createdAt}
             />
           ) : (
             <InterlocutorMessage
               key={id}
               userPhotoUrl={'/avatars/Avatar1.png'}
               message={content}
-              time={'time'}
+              time={createdAt}
             />
           );
         })}

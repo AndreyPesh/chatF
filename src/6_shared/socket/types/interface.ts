@@ -10,6 +10,7 @@ export interface Message {
 export interface UserInRoom {
   id: string;
   fullName: string;
+  isParticipant: boolean;
 }
 
 export interface Room {
