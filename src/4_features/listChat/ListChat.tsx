@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import useUserStore from '../../6_shared/hooks/store/useUserStore';
 import PreviewRoom from './ui/PreviewRoom';
 import { useChatSocketCtx } from '../../6_shared/socket/socketContext';
@@ -10,21 +10,13 @@ const ListChat = () => {
   const { socket } = useChatSocketCtx();
 
   const { user } = useUserStore();
-  // const [rooms, setRooms] = useState<Room[]>([]);
-  const { roomList, setRoomList } = useRoomListStore();
+  const { roomList, setRoomList, updateRoom } = useRoomListStore();
 
   useEffect(() => {
     const getRoomHandler = () => {
-      // socket.on(CHAT_EVENTS.UPDATE_ROOM_LISTENER, (updatedRoom: Room) => {
-      //   setRooms((prevRooms) => {
-      //     return prevRooms.map((currentRoom) => {
-      //       if (currentRoom.id === updatedRoom.id) {
-      //         currentRoom.messages = [...updatedRoom.messages];
-      //       }
-      //       return currentRoom;
-      //     });
-      //   });
-      // });
+      socket.on(CHAT_EVENTS.UPDATE_ROOM_LISTENER, (updatedRoom: Room) => {
+        updateRoom(updatedRoom);
+      });
       socket.emit(
         CHAT_EVENTS.USER_LIST_ROOM,
         { userId: user.id, socketId: socket.id },

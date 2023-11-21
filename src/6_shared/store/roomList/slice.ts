@@ -8,17 +8,17 @@ export const roomListSlice = createSlice({
   initialState: initialRoomListState,
   reducers: {
     setRooms: (_, action: PayloadAction<Room[]>) => [...action.payload],
-    // addMessage: (state, action: PayloadAction<Message>) => {
-    //   if (state.id === action.payload.roomId) {
-    //     return {
-    //       ...state,
-    //       messages: [...state.messages, action.payload],
-    //     };
-    //   }
-    // },
+    updateRoomById: (state, action: PayloadAction<Room>) => {
+      state.map((room, index) => {
+        if (room.id === action.payload.id) {
+          state[index].messages = action.payload.messages;
+        }
+      });
+      return state;
+    },
   },
 });
 
-export const { setRooms } = roomListSlice.actions;
+export const { setRooms, updateRoomById } = roomListSlice.actions;
 
 export default roomListSlice.reducer;
