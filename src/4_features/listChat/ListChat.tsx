@@ -10,18 +10,19 @@ const ListChat = () => {
   const { socket } = useChatSocketCtx();
 
   const { user } = useUserStore();
-  const { roomList, setRoomList, updateRoom } = useRoomListStore();
+  const { roomList, setRoomList, updateCommonAndActiveRooms } =
+    useRoomListStore();
 
   useEffect(() => {
     const getRoomHandler = () => {
       socket.on(CHAT_EVENTS.UPDATE_ROOM_LISTENER, (updatedRoom: Room) => {
-        updateRoom(updatedRoom);
+        updateCommonAndActiveRooms(updatedRoom);
       });
       socket.emit(
         CHAT_EVENTS.USER_LIST_ROOM,
         { userId: user.id, socketId: socket.id },
         (rooms: Room[]) => {
-          setRoomList(rooms);
+          if (rooms) setRoomList(rooms);
         }
       );
     };

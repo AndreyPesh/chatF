@@ -1,12 +1,9 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { Message, Room } from '../../socket/types/interface';
+import { Room } from '../../socket/types/interface';
 
-export interface RoomState extends Room {
-  activeRoomName: string | null;
-}
+export interface RoomState extends Room {}
 
-const initialRoomState: RoomState = {
-  activeRoomName: null,
+const initialRoomState: Room = {
   id: '',
   roomName: '',
   messages: [],
@@ -14,25 +11,24 @@ const initialRoomState: RoomState = {
 };
 
 export const roomSlice = createSlice({
-  name: 'room',
+  name: 'activeRoom',
   initialState: initialRoomState,
   reducers: {
-    setActiveRoom: (state, action: PayloadAction<RoomState>) => ({
+    setActiveRoom: (state, action: PayloadAction<Room>) => ({
       ...state,
       ...action.payload,
     }),
-    addMessage: (state, action: PayloadAction<Message>) => {
-      if (state.id === action.payload.roomId) {
-        return {
-          ...state,
-          messages: [...state.messages, action.payload],
-        };
+    updateActiveRoomMessageList: (state, action: PayloadAction<Room>) => {
+      if (state.id === action.payload.id) {
+        state.messages = [...action.payload.messages];
       }
+      return state;
     },
     resetRoom: () => initialRoomState,
   },
 });
 
-export const { setActiveRoom, addMessage, resetRoom } = roomSlice.actions;
+export const { setActiveRoom, updateActiveRoomMessageList, resetRoom } =
+  roomSlice.actions;
 
 export default roomSlice.reducer;

@@ -1,5 +1,6 @@
 import { useAppDispatch, useAppSelector } from '../../../1_app/store/store';
 import { Room } from '../../socket/types/interface';
+import { updateActiveRoomMessageList } from '../../store/room/slice';
 import { setRooms, updateRoomById } from '../../store/roomList/slice';
 
 const useRoomListStore = () => {
@@ -8,7 +9,10 @@ const useRoomListStore = () => {
   return {
     roomList,
     setRoomList: (rooms: Room[]) => dispatch(setRooms(rooms)),
-    updateRoom: (updatedRoom: Room) => dispatch(updateRoomById(updatedRoom)),
+    updateCommonAndActiveRooms: (updatedRoom: Room) => {
+      dispatch(updateActiveRoomMessageList(updatedRoom));
+      dispatch(updateRoomById(updatedRoom));
+    },
   };
 };
 

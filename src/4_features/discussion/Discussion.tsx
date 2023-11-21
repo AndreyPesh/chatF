@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import useRoomStore from '../../6_shared/hooks/store/useRoomStore';
+import useActiveRoomStore from '../../6_shared/hooks/store/useActiveRoomStore';
 import InterlocutorMessage from '../messages/InterlocutorMessage';
 import SendMessageField from '../messages/SendMessageField';
 import { useChatSocketCtx } from '../../6_shared/socket/socketContext';
@@ -11,7 +11,7 @@ import { Message } from '../../6_shared/socket/types/interface';
 const Discussion = () => {
   const { socket } = useChatSocketCtx();
   const { user } = useUserStore();
-  const { room, addNewMessage } = useRoomStore();
+  const { activeRoom } = useActiveRoomStore();
 
   useEffect(() => {
     const chat = (
@@ -19,7 +19,6 @@ const Discussion = () => {
       { roomId, roomName }: { roomId: string; roomName: string }
     ) => {
       if (message) {
-        addNewMessage(message);
         socket.emit(CHAT_EVENTS.UPDATE_ROOM_EMIT, { roomId, roomName });
       }
     };
@@ -39,25 +38,28 @@ const Discussion = () => {
 
   return (
     <div className="w-full min-h-full p-5 pb-0 bg-light-gray">
-      {room.activeRoomName &&
-        room.messages.map(({ id, content, authorId, createdAt }) => {
-          return authorId === user.id ? (
-            <UserMessage
-              key={id}
-              userPhotoUrl={'/avatars/Avatar1.png'}
-              message={content}
-              time={createdAt}
-            />
-          ) : (
-            <InterlocutorMessage
-              key={id}
-              userPhotoUrl={'/avatars/Avatar1.png'}
-              message={content}
-              time={createdAt}
-            />
-          );
-        })}
-      {room.activeRoomName && <SendMessageField />}
+      {activeRoom.id &&
+        activeRoom.messages.map(
+          ({ id, content, authorId, createdAt, isReaded }) => {
+            return authorId === user.id ? (
+              <UserMessage
+                key={id}
+                userPhotoUrl={'/avatars/Avatar1.png'}
+                message={content}
+                time={createdAt}
+                status={isReaded}
+              />
+            ) : (
+              <InterlocutorMessage
+                key={id}
+                userPhotoUrl={'/avatars/Robert.png'}
+                message={content}
+                time={createdAt}
+              />
+            );
+          }
+        )}
+      {activeRoom.id && <SendMessageField />}
     </div>
   );
 };

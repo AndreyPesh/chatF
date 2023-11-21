@@ -6,9 +6,16 @@ interface UserMessageProps {
   userPhotoUrl: string;
   message: string;
   time: Date;
+  status: boolean;
 }
 
-const UserMessage: FC<UserMessageProps> = ({ userPhotoUrl, message, time }) => {
+const UserMessage: FC<UserMessageProps> = ({
+  userPhotoUrl,
+  message,
+  time,
+  status,
+}) => {
+  
   return (
     <div className="my-3 flex justify-end">
       <div className="max-w-[340px] mr-4">
@@ -16,7 +23,7 @@ const UserMessage: FC<UserMessageProps> = ({ userPhotoUrl, message, time }) => {
           {message}
         </p>
         <div className="pt-2 w-full inline-flex justify-end items-center">
-          <StatusMessage />
+          <StatusMessage isReaded={status} />
           <TimeMessage time={time} />
         </div>
       </div>

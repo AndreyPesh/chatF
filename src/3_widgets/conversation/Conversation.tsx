@@ -1,11 +1,11 @@
 import { useEffect, useRef } from 'react';
 import ClientCaption from '../../4_features/client/ClientCaption';
 import Discussion from '../../4_features/discussion/Discussion';
-import useRoomStore from '../../6_shared/hooks/store/useRoomStore';
+import useActiveRoomStore from '../../6_shared/hooks/store/useActiveRoomStore';
 
 const Conversation = () => {
   const discussionDivRef = useRef<HTMLDivElement>(null);
-  const { room } = useRoomStore();
+  const { activeRoom } = useActiveRoomStore();
 
   const scrollToBottom = () => {
     if (discussionDivRef.current) {
@@ -16,7 +16,7 @@ const Conversation = () => {
 
   useEffect(() => {
     scrollToBottom();
-  }, [room.id, room.messages.length]);
+  }, [activeRoom.id, activeRoom.messages.length]);
 
   return (
     <div
