@@ -3,6 +3,7 @@ export interface Message {
   content: string;
   authorId: string;
   roomId: string;
+  isReaded: boolean;
   createdAt: Date;
   updatedAt: Date;
 }

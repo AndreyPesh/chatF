@@ -1,33 +1,28 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import useUserStore from '../../6_shared/hooks/store/useUserStore';
 import PreviewRoom from './ui/PreviewRoom';
 import { useChatSocketCtx } from '../../6_shared/socket/socketContext';
 import { CHAT_EVENTS } from '../../6_shared/socket/types/events.enum';
 import { Room } from '../../6_shared/socket/types/interface';
+import useRoomListStore from '../../6_shared/hooks/store/useRoomListStore';
 
 const ListChat = () => {
   const { socket } = useChatSocketCtx();
 
   const { user } = useUserStore();
-  const [rooms, setRooms] = useState<Room[]>([]);
+  const { roomList, setRoomList, updateCommonAndActiveRooms } =
+    useRoomListStore();
 
   useEffect(() => {
     const getRoomHandler = () => {
       socket.on(CHAT_EVENTS.UPDATE_ROOM_LISTENER, (updatedRoom: Room) => {
-        setRooms((prevRooms) => {
-          return prevRooms.map((currentRoom) => {
-            if (currentRoom.id === updatedRoom.id) {
-              currentRoom.messages = [...updatedRoom.messages];
-            }
-            return currentRoom;
-          });
-        });
+        updateCommonAndActiveRooms(updatedRoom);
       });
       socket.emit(
         CHAT_EVENTS.USER_LIST_ROOM,
         { userId: user.id, socketId: socket.id },
         (rooms: Room[]) => {
-          setRooms(() => rooms);
+          if (rooms) setRoomList(rooms);
         }
       );
     };
@@ -46,9 +41,9 @@ const ListChat = () => {
 
   return (
     <div className="max-w-[390px] pb-[260px] h-[100vh] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-light">
-      {rooms &&
-        rooms.length > 0 &&
-        rooms.map(({ id, roomName, users, messages }) => (
+      {roomList &&
+        roomList.length > 0 &&
+        roomList.map(({ id, roomName, users, messages }) => (
           <PreviewRoom
             key={id}
             roomName={roomName}

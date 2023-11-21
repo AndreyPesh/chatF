@@ -1,10 +1,12 @@
 import { FC } from 'react';
 import classNames from 'classnames';
-import useRoomStore from '../../../6_shared/hooks/store/useRoomStore';
+import useActiveRoomStore from '../../../6_shared/hooks/store/useActiveRoomStore';
 import useUserStore from '../../../6_shared/hooks/store/useUserStore';
 import { Room } from '../../../6_shared/socket/types/interface';
 import ParticipantName from './ParticipantName';
 import StatusMessage from '../../statusMessage/StatusMessage';
+import UnreadMessageIndicator from './UnreadMessageIndicator';
+import { unreadMessageCounter } from '../utils/unreadMessageCounter';
 
 interface PreviewRoomProps extends Room {}
 
@@ -15,16 +17,19 @@ const PreviewRoom: FC<PreviewRoomProps> = ({
   messages,
 }) => {
   const { user } = useUserStore();
-  const { room, setActiveRoom } = useRoomStore();
+  const { activeRoom, setActiveRoom } = useActiveRoomStore();
 
   const showDiscussion = () => {
-    setActiveRoom({ activeRoomName: roomName, id, users, roomName, messages });
+    setActiveRoom({ id, users, roomName, messages });
   };
 
   const participant = users.find((userData) => userData.id !== user.id);
-  const isActiveRoom = room.id === id;
+  const isActiveRoom = activeRoom.id === id;
+  const lastMessageStatus =
+    messages.length >= 1 ? messages[messages.length - 1].isReaded : null;
   const lastMessage =
     messages.length >= 1 ? messages[messages.length - 1].content : '';
+  const numberOfUnreadMessages = unreadMessageCounter(messages, user.id);
 
   return (
     <div
@@ -47,7 +52,12 @@ const PreviewRoom: FC<PreviewRoomProps> = ({
         </div>
         <div className="pl-[28px] flex flex-col justify-between">
           <span className="font-medium text-concrete">2h</span>
-          <StatusMessage />
+          {lastMessageStatus !== null ? (
+            <StatusMessage isReaded={lastMessageStatus} />
+          ) : (
+            ''
+          )}
+          <UnreadMessageIndicator value={numberOfUnreadMessages} />
         </div>
       </div>
     </div>
