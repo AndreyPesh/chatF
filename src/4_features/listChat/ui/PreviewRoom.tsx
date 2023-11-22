@@ -6,7 +6,11 @@ import { Room } from '../../../6_shared/socket/types/interface';
 import ParticipantName from './ParticipantName';
 import StatusMessage from '../../statusMessage/StatusMessage';
 import UnreadMessageIndicator from './UnreadMessageIndicator';
-import { unreadMessageCounter } from '../utils/unreadMessageCounter';
+import {
+  getLastMessageFromDiscuss,
+  getLastMessageStatus,
+  unreadMessageCounter,
+} from '../utils/unreadMessageCounter';
 
 interface PreviewRoomProps extends Room {}
 
@@ -25,10 +29,8 @@ const PreviewRoom: FC<PreviewRoomProps> = ({
 
   const participant = users.find((userData) => userData.id !== user.id);
   const isActiveRoom = activeRoom.id === id;
-  const lastMessageStatus =
-    messages.length >= 1 ? messages[messages.length - 1].isReaded : null;
-  const lastMessage =
-    messages.length >= 1 ? messages[messages.length - 1].content : '';
+  const lastMessageStatus = getLastMessageStatus(messages);
+  const lastMessage = getLastMessageFromDiscuss(messages);
   const numberOfUnreadMessages = unreadMessageCounter(messages, user.id);
 
   return (
@@ -46,16 +48,13 @@ const PreviewRoom: FC<PreviewRoomProps> = ({
         <div className="ml-[10px] max-w-[195px] grow">
           <ParticipantName participant={participant} />
           <p className="max-h-[37px] font-regular text-dark leading-[18px] font-[14px] overflow-hidden">
-            {/* Not too bad, just trying to catch up on some work. How about you? */}
             {lastMessage}
           </p>
         </div>
         <div className="pl-[28px] flex flex-col justify-between">
           <span className="font-medium text-concrete">2h</span>
-          {lastMessageStatus !== null ? (
+          {lastMessageStatus !== null && numberOfUnreadMessages === 0 && (
             <StatusMessage isReaded={lastMessageStatus} />
-          ) : (
-            ''
           )}
           <UnreadMessageIndicator value={numberOfUnreadMessages} />
         </div>
