@@ -37,28 +37,30 @@ const Discussion = () => {
   }, []);
 
   return (
-    <div className="w-full min-h-full p-5 pb-0 bg-light-gray">
-      {activeRoom.id &&
-        activeRoom.messages.map(
-          ({ id, content, authorId, createdAt, isReaded }) => {
-            return authorId === user.id ? (
-              <UserMessage
-                key={id}
-                userPhotoUrl={'/avatars/Avatar1.png'}
-                message={content}
-                time={createdAt}
-                status={isReaded}
-              />
-            ) : (
-              <InterlocutorMessage
-                key={id}
-                userPhotoUrl={'/avatars/Robert.png'}
-                message={content}
-                time={createdAt}
-              />
-            );
-          }
-        )}
+    <div className="flex flex-col w-full min-h-full p-5 pb-0 bg-light-gray">
+      <div className='grow'>
+        {activeRoom.id &&
+          activeRoom.messages.map(
+            ({ id, content, authorId, createdAt, isReaded }) => {
+              return authorId === user.id ? (
+                <UserMessage
+                  key={id}
+                  userPhotoUrl={'/avatars/Avatar1.png'}
+                  message={content}
+                  time={createdAt}
+                  status={isReaded}
+                />
+              ) : (
+                <InterlocutorMessage
+                  key={id}
+                  userPhotoUrl={'/avatars/Robert.png'}
+                  message={content}
+                  time={createdAt}
+                />
+              );
+            }
+          )}
+      </div>
       {activeRoom.id && <SendMessageField />}
     </div>
   );
