@@ -19,7 +19,11 @@ const Discussion = () => {
       { roomId, roomName }: { roomId: string; roomName: string }
     ) => {
       if (message) {
-        socket.emit(CHAT_EVENTS.UPDATE_ROOM_EMIT, { roomId, roomName });
+        socket.emit(CHAT_EVENTS.UPDATE_ROOM_EMIT, {
+          roomId,
+          roomName,
+          currentUserId: user.id,
+        });
       }
     };
 
@@ -38,7 +42,7 @@ const Discussion = () => {
 
   return (
     <div className="flex flex-col w-full min-h-full p-5 pb-0 bg-light-gray">
-      <div className='grow'>
+      <div className="grow">
         {activeRoom.id &&
           activeRoom.messages.map(
             ({ id, content, authorId, createdAt, isReaded }) => {

@@ -49,6 +49,7 @@ const SendMessageField = () => {
       roomName: activeRoom.roomName,
       roomId: activeRoom.id,
       authorId: participant?.id,
+      currentUserId: user.id,
     });
   };
 

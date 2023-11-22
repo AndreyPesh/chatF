@@ -10,28 +10,32 @@ import {
   getLastMessageFromDiscuss,
   getLastMessageStatus,
   unreadMessageCounter,
-} from '../utils/unreadMessageCounter';
+} from '../utils/lastMessageDescription';
 
-interface PreviewRoomProps extends Room {}
+interface PreviewRoomProps {
+  roomData: Room;
+}
 
-const PreviewRoom: FC<PreviewRoomProps> = ({
-  id,
-  roomName,
-  users,
-  messages,
-}) => {
+const PreviewRoom: FC<PreviewRoomProps> = ({ roomData }) => {
+  const { id, roomName, users, messages, numberOfUnreadMessage } = roomData;
   const { user } = useUserStore();
   const { activeRoom, setActiveRoom } = useActiveRoomStore();
-
-  const showDiscussion = () => {
-    setActiveRoom({ id, users, roomName, messages });
-  };
 
   const participant = users.find((userData) => userData.id !== user.id);
   const isActiveRoom = activeRoom.id === id;
   const lastMessageStatus = getLastMessageStatus(messages);
   const lastMessage = getLastMessageFromDiscuss(messages);
-  const numberOfUnreadMessages = unreadMessageCounter(messages, user.id);
+  // const numberOfUnreadMessages = unreadMessageCounter(messages, user.id);
+
+  const showDiscussion = () => {
+    setActiveRoom({
+      id,
+      users,
+      roomName,
+      messages,
+      numberOfUnreadMessage,
+    });
+  };
 
   return (
     <div
@@ -53,10 +57,10 @@ const PreviewRoom: FC<PreviewRoomProps> = ({
         </div>
         <div className="pl-[28px] flex flex-col justify-between">
           <span className="font-medium text-concrete">2h</span>
-          {lastMessageStatus !== null && numberOfUnreadMessages === 0 && (
+          {lastMessageStatus !== null && numberOfUnreadMessage === 0 && (
             <StatusMessage isReaded={lastMessageStatus} />
           )}
-          <UnreadMessageIndicator value={numberOfUnreadMessages} />
+          <UnreadMessageIndicator value={numberOfUnreadMessage} />
         </div>
       </div>
     </div>
