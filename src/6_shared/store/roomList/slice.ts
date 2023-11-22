@@ -12,6 +12,8 @@ export const roomListSlice = createSlice({
       state.map((room, index) => {
         if (room.id === action.payload.id) {
           state[index].messages = action.payload.messages;
+          state[index].numberOfUnreadMessage =
+            action.payload.numberOfUnreadMessage;
         }
       });
       return state;

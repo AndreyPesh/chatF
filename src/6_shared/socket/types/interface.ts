@@ -17,6 +17,7 @@ export interface UserInRoom {
 export interface Room {
   id: string;
   roomName: string;
+  numberOfUnreadMessage: number;
   users: UserInRoom[];
   messages: Message[];
 }

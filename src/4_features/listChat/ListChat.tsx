@@ -41,16 +41,9 @@ const ListChat = () => {
 
   return (
     <div className="max-w-[390px] pb-[260px] h-[100vh] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-light">
-      {roomList &&
-        roomList.length > 0 &&
-        roomList.map(({ id, roomName, users, messages }) => (
-          <PreviewRoom
-            key={id}
-            roomName={roomName}
-            id={id}
-            users={users}
-            messages={messages}
-          />
+      {roomList.length > 0 &&
+        roomList.map((roomData) => (
+          <PreviewRoom key={roomData.id} roomData={roomData} />
         ))}
     </div>
   );

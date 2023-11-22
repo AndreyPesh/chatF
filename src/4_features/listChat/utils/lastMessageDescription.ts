@@ -8,3 +8,11 @@ export const unreadMessageCounter = (messages: Message[], userId: string) => {
     return counter;
   }, 0);
 };
+
+export const getLastMessageFromDiscuss = (messages: Message[]) => {
+  return messages.length >= 1 ? messages[messages.length - 1].content : '';
+};
+
+export const getLastMessageStatus = (messages: Message[]) => {
+  return messages.length >= 1 ? messages[messages.length - 1].isReaded : null;
+};
