@@ -10,6 +10,7 @@ import {
   getLastMessageFromDiscuss,
   getLastMessageStatus,
 } from '../utils/lastMessageDescription';
+import { getRoomUsers } from '../utils/getRoomUsers';
 
 interface PreviewRoomProps {
   roomData: Room;
@@ -20,11 +21,10 @@ const PreviewRoom: FC<PreviewRoomProps> = ({ roomData }) => {
   const { user } = useUserStore();
   const { activeRoom, setActiveRoom } = useActiveRoomStore();
 
-  const participant = users.find((userData) => userData.id !== user.id);
+  const { currentUser, participant } = getRoomUsers(users, user.id);
   const isActiveRoom = activeRoom.id === id;
   const lastMessageStatus = getLastMessageStatus(messages);
   const lastMessage = getLastMessageFromDiscuss(messages);
-  const currentUser = users.find((userData) => userData.id === user.id);
 
   const showDiscussion = () => {
     setActiveRoom({
