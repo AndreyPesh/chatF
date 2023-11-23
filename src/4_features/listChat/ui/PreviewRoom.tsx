@@ -24,11 +24,7 @@ const PreviewRoom: FC<PreviewRoomProps> = ({ roomData }) => {
   const isActiveRoom = activeRoom.id === id;
   const lastMessageStatus = getLastMessageStatus(messages);
   const lastMessage = getLastMessageFromDiscuss(messages);
-  const currentUser = users.find((user) => {
-    if (!user.isParticipant) {
-      return user.numberOfUnreadMessage;
-    }
-  });
+  const currentUser = users.find((userData) => userData.id === user.id);
 
   const showDiscussion = () => {
     setActiveRoom({

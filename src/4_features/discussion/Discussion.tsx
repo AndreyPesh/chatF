@@ -1,51 +1,12 @@
-import { useEffect } from 'react';
 import useActiveRoomStore from '../../6_shared/hooks/store/useActiveRoomStore';
 import InterlocutorMessage from '../messages/InterlocutorMessage';
 import SendMessageField from '../messages/SendMessageField';
-import { useChatSocketCtx } from '../../6_shared/socket/socketContext';
-import { CHAT_EVENTS } from '../../6_shared/socket/types/events.enum';
 import useUserStore from '../../6_shared/hooks/store/useUserStore';
 import UserMessage from '../messages/UserMessage';
 
 const Discussion = () => {
-  const { socket } = useChatSocketCtx();
   const { user } = useUserStore();
   const { activeRoom } = useActiveRoomStore();
-
-  useEffect(() => {
-    // const getMessageHandler = (
-    //   message: Message,
-    //   { roomId, roomName }: { roomId: string; roomName: string }
-    // ) => {
-    //   console.log('Emit by userID ', user.id);
-    // if (message) {
-    //   socket.emit(CHAT_EVENTS.UPDATE_ROOM_EMIT, {
-    //     roomId,
-    //     roomName,
-    //     currentUserId: user.id,
-    //   });
-    // }
-    // };
-
-    const listeningChatEvent = () => {
-      // socket.on(CHAT_EVENTS.GET_MESSAGE, getMessageHandler);
-    };
-
-    // if (socket.connected) {
-    //   listeningChatEvent();
-    // } else {
-    //   socket.on(CHAT_EVENTS.CONNECT, listeningChatEvent);
-    // }
-
-    // socket.on(CHAT_EVENTS.CONNECT, listeningChatEvent);
-    // console.log('on event get message');
-
-    return () => {
-      socket.off(CHAT_EVENTS.CONNECT, listeningChatEvent);
-      // socket.off(CHAT_EVENTS.GET_MESSAGE, getMessageHandler);
-      // socket.removeListener(CHAT_EVENTS.GET_MESSAGE, getMessageHandler);
-    };
-  }, [user]);
 
   return (
     <div className="flex flex-col w-full min-h-full p-5 pb-0 bg-light-gray">
