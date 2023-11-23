@@ -9,7 +9,7 @@ import UnreadMessageIndicator from './UnreadMessageIndicator';
 import {
   getLastMessageFromDiscuss,
   getLastMessageStatus,
-  unreadMessageCounter,
+  // unreadMessageCounter,
 } from '../utils/lastMessageDescription';
 
 interface PreviewRoomProps {
@@ -17,7 +17,7 @@ interface PreviewRoomProps {
 }
 
 const PreviewRoom: FC<PreviewRoomProps> = ({ roomData }) => {
-  const { id, roomName, users, messages, numberOfUnreadMessage } = roomData;
+  const { id, roomName, users, messages } = roomData;
   const { user } = useUserStore();
   const { activeRoom, setActiveRoom } = useActiveRoomStore();
 
@@ -26,6 +26,11 @@ const PreviewRoom: FC<PreviewRoomProps> = ({ roomData }) => {
   const lastMessageStatus = getLastMessageStatus(messages);
   const lastMessage = getLastMessageFromDiscuss(messages);
   // const numberOfUnreadMessages = unreadMessageCounter(messages, user.id);
+  const numberOfUnreadMessage = users.find((user) => {
+    if (!user.isParticipant) {
+      return user.numberOfUnreadMessage;
+    }
+  });
 
   const showDiscussion = () => {
     setActiveRoom({
@@ -33,7 +38,6 @@ const PreviewRoom: FC<PreviewRoomProps> = ({ roomData }) => {
       users,
       roomName,
       messages,
-      numberOfUnreadMessage,
     });
   };
 
@@ -57,10 +61,16 @@ const PreviewRoom: FC<PreviewRoomProps> = ({ roomData }) => {
         </div>
         <div className="pl-[28px] flex flex-col justify-between">
           <span className="font-medium text-concrete">2h</span>
-          {lastMessageStatus !== null && numberOfUnreadMessage === 0 && (
-            <StatusMessage isReaded={lastMessageStatus} />
+          {lastMessageStatus !== null &&
+            numberOfUnreadMessage &&
+            numberOfUnreadMessage.numberOfUnreadMessage === 0 && (
+              <StatusMessage isReaded={lastMessageStatus} />
+            )}
+          {numberOfUnreadMessage && (
+            <UnreadMessageIndicator
+              value={numberOfUnreadMessage.numberOfUnreadMessage}
+            />
           )}
-          <UnreadMessageIndicator value={numberOfUnreadMessage} />
         </div>
       </div>
     </div>

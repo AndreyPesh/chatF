@@ -14,31 +14,39 @@ const Discussion = () => {
   const { activeRoom } = useActiveRoomStore();
 
   useEffect(() => {
-    const chat = (
-      message: Message,
-      { roomId, roomName }: { roomId: string; roomName: string }
-    ) => {
-      if (message) {
-        socket.emit(CHAT_EVENTS.UPDATE_ROOM_EMIT, {
-          roomId,
-          roomName,
-          currentUserId: user.id,
-        });
-      }
-    };
+    // const getMessageHandler = (
+    //   message: Message,
+    //   { roomId, roomName }: { roomId: string; roomName: string }
+    // ) => {
+    //   console.log('Emit by userID ', user.id);
+    // if (message) {
+    //   socket.emit(CHAT_EVENTS.UPDATE_ROOM_EMIT, {
+    //     roomId,
+    //     roomName,
+    //     currentUserId: user.id,
+    //   });
+    // }
+    // };
 
     const listeningChatEvent = () => {
-      socket.on(CHAT_EVENTS.CHAT, chat);
+      // socket.on(CHAT_EVENTS.GET_MESSAGE, getMessageHandler);
     };
 
-    socket.on(CHAT_EVENTS.CONNECT, listeningChatEvent);
+    // if (socket.connected) {
+    //   listeningChatEvent();
+    // } else {
+    //   socket.on(CHAT_EVENTS.CONNECT, listeningChatEvent);
+    // }
+
+    // socket.on(CHAT_EVENTS.CONNECT, listeningChatEvent);
+    // console.log('on event get message');
 
     return () => {
       socket.off(CHAT_EVENTS.CONNECT, listeningChatEvent);
-      socket.off(CHAT_EVENTS.CHAT, chat);
-      socket.removeListener(CHAT_EVENTS.CHAT, chat);
+      // socket.off(CHAT_EVENTS.GET_MESSAGE, getMessageHandler);
+      // socket.removeListener(CHAT_EVENTS.GET_MESSAGE, getMessageHandler);
     };
-  }, []);
+  }, [user]);
 
   return (
     <div className="flex flex-col w-full min-h-full p-5 pb-0 bg-light-gray">

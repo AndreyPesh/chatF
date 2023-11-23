@@ -7,8 +7,9 @@ const initialRoomState: Room = {
   id: '',
   roomName: '',
   messages: [],
-  numberOfUnreadMessage: 0,
-  users: [{ id: '', fullName: '', isParticipant: false }],
+  users: [
+    { id: '', fullName: '', isParticipant: false, numberOfUnreadMessage: 0 },
+  ],
 };
 
 export const roomSlice = createSlice({
@@ -22,7 +23,7 @@ export const roomSlice = createSlice({
     updateActiveRoomMessageList: (state, action: PayloadAction<Room>) => {
       if (state.id === action.payload.id) {
         state.messages = [...action.payload.messages];
-        state.numberOfUnreadMessage = action.payload.numberOfUnreadMessage;
+        state.users = action.payload.users;
       }
       return state;
     },

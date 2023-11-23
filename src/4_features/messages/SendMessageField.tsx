@@ -54,7 +54,7 @@ const SendMessageField = () => {
   };
 
   const sendMessageToServer = () => {
-    socket.emit(CHAT_EVENTS.CHAT, {
+    socket.emit(CHAT_EVENTS.SEND_MESSAGE, {
       authorId: user.id,
       message: messageText,
       roomName: activeRoom.roomName,
