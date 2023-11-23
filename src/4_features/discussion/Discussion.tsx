@@ -6,7 +6,6 @@ import { useChatSocketCtx } from '../../6_shared/socket/socketContext';
 import { CHAT_EVENTS } from '../../6_shared/socket/types/events.enum';
 import useUserStore from '../../6_shared/hooks/store/useUserStore';
 import UserMessage from '../messages/UserMessage';
-import { Message } from '../../6_shared/socket/types/interface';
 
 const Discussion = () => {
   const { socket } = useChatSocketCtx();

@@ -9,7 +9,6 @@ import UnreadMessageIndicator from './UnreadMessageIndicator';
 import {
   getLastMessageFromDiscuss,
   getLastMessageStatus,
-  // unreadMessageCounter,
 } from '../utils/lastMessageDescription';
 
 interface PreviewRoomProps {
@@ -25,8 +24,7 @@ const PreviewRoom: FC<PreviewRoomProps> = ({ roomData }) => {
   const isActiveRoom = activeRoom.id === id;
   const lastMessageStatus = getLastMessageStatus(messages);
   const lastMessage = getLastMessageFromDiscuss(messages);
-  // const numberOfUnreadMessages = unreadMessageCounter(messages, user.id);
-  const numberOfUnreadMessage = users.find((user) => {
+  const currentUser = users.find((user) => {
     if (!user.isParticipant) {
       return user.numberOfUnreadMessage;
     }
@@ -62,14 +60,12 @@ const PreviewRoom: FC<PreviewRoomProps> = ({ roomData }) => {
         <div className="pl-[28px] flex flex-col justify-between">
           <span className="font-medium text-concrete">2h</span>
           {lastMessageStatus !== null &&
-            numberOfUnreadMessage &&
-            numberOfUnreadMessage.numberOfUnreadMessage === 0 && (
+            currentUser &&
+            currentUser.numberOfUnreadMessage === 0 && (
               <StatusMessage isReaded={lastMessageStatus} />
             )}
-          {numberOfUnreadMessage && (
-            <UnreadMessageIndicator
-              value={numberOfUnreadMessage.numberOfUnreadMessage}
-            />
+          {currentUser && (
+            <UnreadMessageIndicator value={currentUser.numberOfUnreadMessage} />
           )}
         </div>
       </div>
