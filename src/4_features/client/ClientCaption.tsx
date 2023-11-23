@@ -3,16 +3,20 @@ import useActiveRoomStore from '../../6_shared/hooks/store/useActiveRoomStore';
 import StatusClient from '../statusClient/StatusClient';
 import { DEFAULT_USERNAME } from './types/client.constants';
 import ActionClient from './ui/ActionClient';
+import useUserStore from '../../6_shared/hooks/store/useUserStore';
 
 const ClientCaption = () => {
   const { activeRoom } = useActiveRoomStore();
+  const { user } = useUserStore();
   const { showInterlocutorDescription } = useInterlocutorDescriptionState();
 
   if (!activeRoom.id) {
     return null;
   }
 
-  const participant = activeRoom.users.find((user) => user.isParticipant);
+  const participant = activeRoom.users.find((userData) => {
+    if (userData.id !== user.id) return userData;
+  });
 
   return (
     <div className="sticky top-0 py-6 px-8 flex w-full bg-white z-10">

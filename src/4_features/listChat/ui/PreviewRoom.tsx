@@ -9,23 +9,22 @@ import UnreadMessageIndicator from './UnreadMessageIndicator';
 import {
   getLastMessageFromDiscuss,
   getLastMessageStatus,
-  unreadMessageCounter,
 } from '../utils/lastMessageDescription';
+import { getRoomUsers } from '../utils/getRoomUsers';
 
 interface PreviewRoomProps {
   roomData: Room;
 }
 
 const PreviewRoom: FC<PreviewRoomProps> = ({ roomData }) => {
-  const { id, roomName, users, messages, numberOfUnreadMessage } = roomData;
+  const { id, roomName, users, messages } = roomData;
   const { user } = useUserStore();
   const { activeRoom, setActiveRoom } = useActiveRoomStore();
 
-  const participant = users.find((userData) => userData.id !== user.id);
+  const { currentUser, participant } = getRoomUsers(users, user.id);
   const isActiveRoom = activeRoom.id === id;
   const lastMessageStatus = getLastMessageStatus(messages);
   const lastMessage = getLastMessageFromDiscuss(messages);
-  // const numberOfUnreadMessages = unreadMessageCounter(messages, user.id);
 
   const showDiscussion = () => {
     setActiveRoom({
@@ -33,7 +32,6 @@ const PreviewRoom: FC<PreviewRoomProps> = ({ roomData }) => {
       users,
       roomName,
       messages,
-      numberOfUnreadMessage,
     });
   };
 
@@ -57,10 +55,14 @@ const PreviewRoom: FC<PreviewRoomProps> = ({ roomData }) => {
         </div>
         <div className="pl-[28px] flex flex-col justify-between">
           <span className="font-medium text-concrete">2h</span>
-          {lastMessageStatus !== null && numberOfUnreadMessage === 0 && (
-            <StatusMessage isReaded={lastMessageStatus} />
+          {lastMessageStatus !== null &&
+            currentUser &&
+            currentUser.numberOfUnreadMessage === 0 && (
+              <StatusMessage isReaded={lastMessageStatus} />
+            )}
+          {currentUser && (
+            <UnreadMessageIndicator value={currentUser.numberOfUnreadMessage} />
           )}
-          <UnreadMessageIndicator value={numberOfUnreadMessage} />
         </div>
       </div>
     </div>

@@ -15,9 +15,12 @@ const ListChat = () => {
 
   useEffect(() => {
     const getRoomHandler = () => {
-      socket.on(CHAT_EVENTS.UPDATE_ROOM_LISTENER, (updatedRoom: Room) => {
-        updateCommonAndActiveRooms(updatedRoom);
-      });
+      socket.on(
+        CHAT_EVENTS.UPDATE_ROOM_LISTENER,
+        ({ room }: { room: Room }) => {
+          updateCommonAndActiveRooms(room);
+        }
+      );
       socket.emit(
         CHAT_EVENTS.USER_LIST_ROOM,
         { userId: user.id, socketId: socket.id },
