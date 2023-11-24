@@ -44,7 +44,7 @@ const PreviewRoom: FC<PreviewRoomProps> = ({ roomData }) => {
       })}
     >
       <div className="pb-6 flex border-b border-b-light">
-        <div className="w-[58px] h-[58px] rounded-full overflow-hidden">
+        <div className="w-[58px] h-[58px] shrink-0 rounded-full overflow-hidden">
           <img src="/avatars/Avatar1.png" alt="user" />
         </div>
         <div className="ml-[10px] max-w-[195px] grow">
