@@ -1,4 +1,4 @@
-import { UserInRoom } from '../../../6_shared/socket/types/interface';
+import { UserInRoom } from '../socket/types/interface';
 
 export const getRoomUsers = (users: UserInRoom[], currentUserId: string) => {
   const currentUser = users.find((userData) => userData.id === currentUserId);

@@ -43,7 +43,7 @@ const ListChat = () => {
   }, [user.id, socket.id]);
 
   return (
-    <div className="max-w-[390px] pb-[260px] h-[100vh] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-light">
+    <div className="w-full sm:max-w-[390px] pb-[260px] h-[100vh] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-light">
       {roomList.length > 0 &&
         roomList.map((roomData) => (
           <PreviewRoom key={roomData.id} roomData={roomData} />

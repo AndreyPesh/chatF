@@ -10,6 +10,7 @@ import useRoomStore from '../../6_shared/hooks/store/useActiveRoomStore';
 import { useChatSocketCtx } from '../../6_shared/socket/socketContext';
 import { CHAT_EVENTS } from '../../6_shared/socket/types/events.enum';
 import useUserStore from '../../6_shared/hooks/store/useUserStore';
+import { getRoomUsers } from '../../6_shared/utils/getRoomUsers';
 
 const SendMessageField = () => {
   const { user } = useUserStore();
@@ -17,10 +18,7 @@ const SendMessageField = () => {
   const { activeRoom } = useRoomStore();
   const [messageText, setMessageText] = useState('');
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
-
-  const participant = activeRoom.users.find(
-    (memberChat) => memberChat.id !== user.id
-  );
+  const { currentUser, participant } = getRoomUsers(activeRoom.users, user.id);
 
   const onMessageHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
     event.preventDefault();
@@ -45,12 +43,14 @@ const SendMessageField = () => {
   };
 
   const readMessage = () => {
-    socket.emit(CHAT_EVENTS.READ_MESSAGE_EMIT, {
-      roomName: activeRoom.roomName,
-      roomId: activeRoom.id,
-      authorId: participant?.id,
-      currentUserId: user.id,
-    });
+    if (currentUser?.numberOfUnreadMessage) {
+      socket.emit(CHAT_EVENTS.READ_MESSAGE_EMIT, {
+        roomName: activeRoom.roomName,
+        roomId: activeRoom.id,
+        authorId: participant?.id,
+        currentUserId: user.id,
+      });
+    }
   };
 
   const sendMessageToServer = () => {

@@ -3,7 +3,7 @@ const StatusClient = () => {
   return (
     <div className="inline-flex h-[18px] items-center">
       <span className="w-2 h-2 inline-flex rounded-full bg-light-green"></span>
-      <p className="pl-1 text-dark font-regular select-none">Active now</p>
+      <p className="pl-1 text-dark font-regular text-xs md:text-sm select-none">Active now</p>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { TYPE_BUTTON } from '../enums/buttons';
+import { TYPE_BUTTON } from '../../enums/buttons';
 import classNames from 'classnames';
 import CircleSpinner from '../spinners/CircleSpinner';
 
@@ -15,7 +15,7 @@ const Button: FC<ButtonProps> = ({ sign, type, isLoading, handler }) => {
     <button
       onClick={handler}
       className={classNames(
-        'my-3 py-3 inline-flex w-full min-w-[300px] min-h-[48px] items-center justify-center font-medium font-4 rounded-full transition-transform active:scale-90 disabled:cursor-not-allowed disabled:scale-100 disabled:bg-opacity-70',
+        'my-3 py-3 inline-flex w-full min-w-[200px] min-h-[48px] items-center justify-center font-medium font-4 rounded-full transition-transform active:scale-90 disabled:cursor-not-allowed disabled:scale-100 disabled:bg-opacity-70',
         {
           'bg-nephritis text-white': type === TYPE_BUTTON.NEPHRITE,
         },
