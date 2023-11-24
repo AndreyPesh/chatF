@@ -51,10 +51,10 @@ const RegisterForm = () => {
       <Title>Register your account!</Title>
       <p className="text-center text-gray-500">Fill out the form!</p>
       <form onSubmit={handleSubmit(onSubmitForm)}>
-        <div className="relative p-4 pb-8 flex flex-col items-center">
+        <div className="relative p-2 pb-8 md:p-4 flex flex-col items-center">
           <label
             htmlFor="user_firstName"
-            className="block mb-2 w-[300px] font-bold"
+            className="block mb-2 w-full sm:w-[300px] font-bold"
           >
             First name:
           </label>
@@ -62,14 +62,14 @@ const RegisterForm = () => {
             id="user_firstName"
             type="text"
             {...register('firstName')}
-            className="block w-[300px] p-2.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-nephritis focus:border-nephritis"
+            className="block w-full sm:w-[300px] p-2.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-nephritis focus:border-nephritis"
           />
           <FormErrorMessage message={errors.firstName?.message} />
         </div>
-        <div className="relative p-4 pb-8 flex flex-col items-center">
+        <div className="relative p-2 pb-8 md:p-4 flex flex-col items-center">
           <label
             htmlFor="user_lastName"
-            className="block mb-2 w-[300px] font-bold"
+            className="block mb-2 w-full sm:w-[300px] font-bold"
           >
             Last name:
           </label>
@@ -77,14 +77,14 @@ const RegisterForm = () => {
             id="user_lastName"
             type="text"
             {...register('lastName')}
-            className="block w-[300px] p-2.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-nephritis focus:border-nephritis"
+            className="block w-full sm:w-[300px] p-2.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-nephritis focus:border-nephritis"
           />
           <FormErrorMessage message={errors.lastName?.message} />
         </div>
-        <div className="relative p-4 pb-8 flex flex-col items-center">
+        <div className="relative p-2 pb-8 md:p-4 flex flex-col items-center">
           <label
             htmlFor="user_email"
-            className="block mb-2 w-[300px] font-bold"
+            className="block mb-2 w-full sm:w-[300px] font-bold"
           >
             E-mail:
           </label>
@@ -93,14 +93,14 @@ const RegisterForm = () => {
             type="email"
             autoComplete="on"
             {...register('email')}
-            className="block w-[300px] p-2.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-nephritis focus:border-nephritis"
+            className="block w-full sm:w-[300px] p-2.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-nephritis focus:border-nephritis"
           />
           <FormErrorMessage message={errors.email?.message} />
         </div>
-        <div className="relative p-4 pb-8 flex flex-col items-center">
+        <div className="relative p-2 pb-8 md:p-4 flex flex-col items-center">
           <label
             htmlFor="user_password"
-            className="block mb-2 w-[300px] font-bold"
+            className="block mb-2 w-full sm:w-[300px] font-bold"
           >
             Password:
           </label>
@@ -109,14 +109,14 @@ const RegisterForm = () => {
             type="password"
             autoComplete="on"
             {...register('password')}
-            className="block w-[300px] p-2.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-nephritis focus:border-nephritis"
+            className="block w-full sm:w-[300px] p-2.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-nephritis focus:border-nephritis"
           />
           <FormErrorMessage message={errors.password?.message} />
         </div>
-        <div className="relative p-4 pb-8 flex flex-col items-center">
+        <div className="relative p-2 pb-8 md:p-4 flex flex-col items-center">
           <label
             htmlFor="user_confirmPassword"
-            className="block mb-2 w-[300px] font-bold"
+            className="block mb-2 w-full sm:w-[300px] font-bold"
           >
             Confirm password:
           </label>
@@ -125,11 +125,11 @@ const RegisterForm = () => {
             type="password"
             autoComplete="on"
             {...register('confirmPassword')}
-            className="block w-[300px] p-2.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-nephritis focus:border-nephritis"
+            className="block w-full sm:w-[300px] p-2.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-nephritis focus:border-nephritis"
           />
           <FormErrorMessage message={errors.confirmPassword?.message} />
         </div>
-        <div className="m-auto pt-4 w-[300px]">
+        <div className="m-auto pt-4 w-[200px] sm:w-[300px]">
           <Button
             sign="Register"
             type={TYPE_BUTTON.LOGIN}
