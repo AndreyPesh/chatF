@@ -4,6 +4,7 @@ import StatusClient from '../statusClient/StatusClient';
 import { DEFAULT_USERNAME } from './types/client.constants';
 import ActionClient from './ui/ActionClient';
 import useUserStore from '../../6_shared/hooks/store/useUserStore';
+import Cross from '../../6_shared/ui/cross/Cross';
 
 const ClientCaption = () => {
   const { activeRoom } = useActiveRoomStore();
@@ -37,6 +38,9 @@ const ClientCaption = () => {
       </div>
       <div>
         <ActionClient />
+      </div>
+      <div className="ml-3  md:hidden">
+        <Cross handler={() => {}} size={{ width: '52px', height: '52px' }} />
       </div>
     </div>
   );

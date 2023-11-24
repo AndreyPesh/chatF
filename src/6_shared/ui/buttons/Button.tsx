@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { TYPE_BUTTON } from '../enums/buttons';
+import { TYPE_BUTTON } from '../../enums/buttons';
 import classNames from 'classnames';
 import CircleSpinner from '../spinners/CircleSpinner';
 
