@@ -7,7 +7,7 @@ import useUserStore from '../../6_shared/hooks/store/useUserStore';
 import Cross from '../../6_shared/ui/cross/Cross';
 
 const ClientCaption = () => {
-  const { activeRoom } = useActiveRoomStore();
+  const { activeRoom, resetRoom } = useActiveRoomStore();
   const { user } = useUserStore();
   const { showInterlocutorDescription } = useInterlocutorDescriptionState();
 
@@ -40,7 +40,10 @@ const ClientCaption = () => {
         <ActionClient />
       </div>
       <div className="ml-3  md:hidden">
-        <Cross handler={() => {}} size={{ width: '52px', height: '52px' }} />
+        <Cross
+          handler={() => resetRoom()}
+          size={{ width: '52px', height: '52px' }}
+        />
       </div>
     </div>
   );

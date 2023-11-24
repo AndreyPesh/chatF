@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import Button from '../../../6_shared/buttons/Button';
+import Button from '../../../6_shared/ui/buttons/Button';
 import { TYPE_BUTTON } from '../../../6_shared/enums/buttons';
-import Title from '../../../6_shared/titles/Title';
+import Title from '../../../6_shared/ui/titles/Title';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { registerFormSchema } from './validation/registerValidationSchema';
 import FormErrorMessage from '../../../6_shared/error/FormErrorMessage';
