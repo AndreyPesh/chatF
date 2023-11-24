@@ -10,7 +10,7 @@ import {
   getLastMessageFromDiscuss,
   getLastMessageStatus,
 } from '../utils/lastMessageDescription';
-import { getRoomUsers } from '../utils/getRoomUsers';
+import { getRoomUsers } from '../../../6_shared/utils/getRoomUsers';
 
 interface PreviewRoomProps {
   roomData: Room;
