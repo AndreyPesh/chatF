@@ -9,7 +9,7 @@ const Discussion = () => {
   const { activeRoom } = useActiveRoomStore();
 
   return (
-    <div className="flex flex-col w-full min-h-full p-5 pb-0 bg-light-gray">
+    <div className="flex flex-col w-full min-h-[93%] md:min-h-[90%] p-5 pb-0 bg-light-gray border-box">
       <div className="grow">
         {activeRoom.id &&
           activeRoom.messages.map(
