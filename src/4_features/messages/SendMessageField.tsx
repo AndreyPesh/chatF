@@ -43,6 +43,7 @@ const SendMessageField = () => {
   };
 
   const readMessage = () => {
+    socket.emit('typing');
     if (currentUser?.numberOfUnreadMessage) {
       socket.emit(CHAT_EVENTS.READ_MESSAGE_EMIT, {
         roomName: activeRoom.roomName,
